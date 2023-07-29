@@ -10,11 +10,14 @@ android {
     defaultConfig {
         applicationId "com.hotbitmapgg.ohmybilibili"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode props["versionCode"] as int
         versionName props['versionName']
 
     }
+    /*ndk{
+        abiFilters armeabi-v7a, arm64-v8a,x86,x86_64
+    }*/
 
     buildTypes {
         release {
@@ -46,6 +49,13 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        // support的用这个
+        force 'com.android.support.constraint:constraint-layout:1.1.2'
     }
 }
 
@@ -86,6 +96,19 @@ dependencies {
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'com.jakewharton:butterknife:8.4.0'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.bytedance.applog:RangersAppLog-All-cn:6.15.4'
+
+    implementation 'com.pangle.cn:ads-sdk-pro:5.4.1.6'
+    implementation ('com.pangle.cn:pangrowth-sdk:3.9.0.1'){
+        exclude group: 'com.pangle.cn', module: 'partner-live-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-novel-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-game-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-luckycat-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-reward-sdk'
+        exclude group: 'com.pangle.cn', module: 'partner-luckycat-api-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-luckycat-api'
+    }
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 

@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bytedance.sdk.dp.DPSdk;
+import com.bytedance.sdk.dp.DPWidgetDramaHomeParams;
+import com.bytedance.sdk.dp.IDPWidget;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.module.entry.AttentionPeopleFragment;
 import com.hotbitmapgg.bilibili.module.entry.ConsumeHistoryFragment;
@@ -62,6 +65,11 @@ public class MainActivity extends RxBaseActivity implements NavigationView.OnNav
         initFragments();
         //初始化侧滑菜单
         initNavigationView();
+
+        //TODO 加的短剧测试代码
+        IDPWidget dramaHome =
+                DPSdk.factory().createDramaHome(DPWidgetDramaHomeParams.obtain());
+        dramaHome.
     }
 
 
