@@ -67,9 +67,8 @@ public class MainActivity extends RxBaseActivity implements NavigationView.OnNav
         initNavigationView();
 
         //TODO 加的短剧测试代码
-        IDPWidget dramaHome =
-                DPSdk.factory().createDramaHome(DPWidgetDramaHomeParams.obtain());
-        dramaHome.
+        /*IDPWidget dramaHome =
+                DPSdk.factory().createDramaHome(DPWidgetDramaHomeParams.obtain());*/
     }
 
 
