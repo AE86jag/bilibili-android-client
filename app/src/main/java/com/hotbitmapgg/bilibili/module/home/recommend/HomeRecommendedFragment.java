@@ -176,11 +176,12 @@ public class HomeRecommendedFragment extends RxLazyFragment {
                                 results.get(i).getBody()));
                         break;
                     default:
+                        //修改后都走这里
                         mSectionedAdapter.addSection(new HomeRecommendedSection(
                                 getActivity(),
                                 results.get(i).getHead().getTitle(),
                                 results.get(i).getType(),
-                                results.get(1).getHead().getCount(),
+                                results.get(i).getHead().getCount(),
                                 results.get(i).getBody()));
                         break;
                 }

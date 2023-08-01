@@ -42,11 +42,17 @@ import butterknife.BindView;
  * MainActivity
  */
 public class MainActivity extends RxBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+    /**
+     * DrawerLayout 带有滑动的, 其实是一个布局控件，继承ViewGroup，与LinearLayout 等控件是一种东西，属于同级控件.
+     */
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.navigation_view)
     NavigationView mNavigationView;
 
+    /**
+     * 首页推荐、侧滑栏菜单
+     */
     private Fragment[] fragments;
     private int currentTabIndex;
     private int index;

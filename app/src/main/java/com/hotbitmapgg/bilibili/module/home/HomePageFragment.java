@@ -56,6 +56,9 @@ public class HomePageFragment extends RxLazyFragment {
 
     @Override
     public void finishCreateView(Bundle state) {
+        /* setHasOptionsMenu(true) 可告知系统您的 fragment 想要接收与菜单相关的回调。
+        当发生与菜单相关的事件（例如点击）时，系统会先对 activity 调用事件处理方法，
+        然后再对 fragment 调用该方法。*/
         setHasOptionsMenu(true);
         initToolBar();
         initSearchView();
@@ -108,7 +111,7 @@ public class HomePageFragment extends RxLazyFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
+        /*switch (id) {
             case R.id.id_action_game:
                 //游戏中心
                 startActivity(new Intent(getActivity(), GameCentreActivity.class));
@@ -117,7 +120,7 @@ public class HomePageFragment extends RxLazyFragment {
                 //离线缓存
                 startActivity(new Intent(getActivity(), OffLineDownloadActivity.class));
                 break;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

@@ -49,7 +49,8 @@ public class RetrofitHelper {
     }
 
     public static BiliAppService getBiliAppAPI() {
-        return createApi(BiliAppService.class, ApiConstants.APP_BASE_URL);
+        //return createApi(BiliAppService.class, ApiConstants.APP_BASE_URL);
+        return createApi(BiliAppService.class, "http://192.168.3.199:80");
     }
 
     public static BiliApiService getBiliAPI() {
@@ -114,9 +115,9 @@ public class RetrofitHelper {
                     //设置Http缓存
                     Cache cache = new Cache(new File(BilibiliApp.getInstance().getCacheDir(), "HttpCache"), 1024 * 1024 * 10);
                     mOkHttpClient = new OkHttpClient.Builder()
-                            .cache(cache)
+                            //.cache(cache)
                             .addInterceptor(interceptor)
-                            .addNetworkInterceptor(new CacheInterceptor())
+                            //.addNetworkInterceptor(new CacheInterceptor())
                             .addNetworkInterceptor(new StethoInterceptor())
                             .retryOnConnectionFailure(true)
                             .connectTimeout(30, TimeUnit.SECONDS)

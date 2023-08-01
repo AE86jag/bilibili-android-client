@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/video_preview"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/card_image_default_height"
+            android:layout_height="140dp"
             android:scaleType="center" />
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lineSpacingExtra="2dp"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:textColor="@color/font_normal"
                 android:textSize="@dimen/default_small_text_size" />
         </LinearLayout>
@@ -74,7 +74,6 @@
                 android:layout_height="@dimen/video_info_mini_icons_size"
                 android:layout_marginStart="@dimen/default_general_margin"
                 android:src="@drawable/ic_subtitles_black_24dp" />
-
             <TextView
                 android:id="@+id/video_review_count"
                 android:layout_width="wrap_content"

@@ -68,7 +68,8 @@ public class HomeRecommendedSection extends StatelessSection {
 
 
     public HomeRecommendedSection(Context context, String title, String type, int liveCount, List<RecommendInfo.ResultBean.BodyBean> datas) {
-        super(R.layout.layout_home_recommend_head, R.layout.layout_home_recommend_foot, R.layout.layout_home_recommend_boby);
+        //super(R.layout.layout_home_recommend_head, R.layout.layout_home_recommend_foot, R.layout.layout_home_recommend_boby);
+        super(R.layout.layout_home_recommend_boby);
         this.mContext = context;
         this.title = title;
         this.type = type;
@@ -124,7 +125,7 @@ public class HomeRecommendedSection extends StatelessSection {
         switch (type) {
             case TYPE_LIVE:
                 //直播item
-                itemViewHolder.mLiveLayout.setVisibility(View.VISIBLE);
+               itemViewHolder.mLiveLayout.setVisibility(View.VISIBLE);
                 itemViewHolder.mVideoLayout.setVisibility(View.GONE);
                 itemViewHolder.mBangumiLayout.setVisibility(View.GONE);
                 itemViewHolder.mLiveUp.setText(bodyBean.getUp());
@@ -149,7 +150,7 @@ public class HomeRecommendedSection extends StatelessSection {
                 itemViewHolder.mLiveLayout.setVisibility(View.GONE);
                 itemViewHolder.mBangumiLayout.setVisibility(View.GONE);
                 itemViewHolder.mVideoLayout.setVisibility(View.VISIBLE);
-                itemViewHolder.mVideoPlayNum.setText(bodyBean.getPlay());
+                //itemViewHolder.mVideoPlayNum.setText(bodyBean.getPlay());
                 itemViewHolder.mVideoReviewCount.setText(bodyBean.getDanmaku());
                 break;
         }
@@ -326,8 +327,8 @@ public class HomeRecommendedSection extends StatelessSection {
         ImageView mVideoImg;
         @BindView(R.id.video_title)
         TextView mVideoTitle;
-        @BindView(R.id.video_play_num)
-        TextView mVideoPlayNum;
+       /* @BindView(R.id.video_play_num)
+        TextView mVideoPlayNum;*/
         @BindView(R.id.video_review_count)
         TextView mVideoReviewCount;
         @BindView(R.id.layout_live)

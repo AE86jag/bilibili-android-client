@@ -35,9 +35,9 @@ public class BilibiliApp extends Application {
         super.onCreate();
         mInstance = this;
         init();
-        initAppLog();
+        //initAppLog();
         //强烈建议在应用对应的Application#onCreate()方法中调用，避免出现content为null的异常
-        TTAdSdk.init(this,
+        /*TTAdSdk.init(this,
                 new TTAdConfig.Builder()
                         .appId("5413164")//xxxxxxx为穿山甲媒体平台注册的应用ID
                         .useTextureView(true) //默认使用SurfaceView播放视频广告,当有SurfaceView冲突的场景，可以使用TextureView
@@ -60,16 +60,16 @@ public class BilibiliApp extends Application {
                     public void fail(int i, String s) {
                         Log.e(TAG, "fail: ad adk init failed, error code is: " + i + ", message is: " + s);
                     }
-                });
+                });*/
         //随便哪里可以调用了
         //TTAdManager ttAdManager = TTAdSdk.getAdManager();
 
         //短剧SDK
-        DPSdkConfig.Builder configBuilder = new DPSdkConfig.Builder().debug(true);
+        //DPSdkConfig.Builder configBuilder = new DPSdkConfig.Builder().debug(true);
         //TODO JSON文件需要从平台下载
-        DPSdk.init(this, "SDK_Setting_5175152.json", configBuilder.build());
+        //DPSdk.init(this, "SDK_Setting_5175152.json", configBuilder.build());
 
-        DPSdk.start(new DPSdk.StartListener() {
+        /*DPSdk.start(new DPSdk.StartListener() {
             @Override
             public void onStartComplete(boolean isSuccess, String s) {
 
@@ -80,7 +80,7 @@ public class BilibiliApp extends Application {
                 Log.e(TAG, "start result=$isSuccess, msg=$s");
                 //Bus.getInstance().sendEvent(DPStartEvent(isSuccess))
             }
-        });
+        });*/
     }
 
     private void init() {
