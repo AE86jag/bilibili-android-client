@@ -2,6 +2,7 @@ package com.hotbitmapgg.bilibili.adapter.helper;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 /**
  * Created by hcc on 16/8/7 21:18
@@ -23,6 +24,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        Log.i("A", "onScrolled: dx: " + dx + ", dy: " + dy);
         super.onScrolled(recyclerView, dx, dy);
         if (dy == 0) {
             return;

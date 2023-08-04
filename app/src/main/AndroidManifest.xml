@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.hotbitmapgg.ohmybilibili"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <supports-screens
@@ -19,11 +20,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-    <!--必要权限，解决安全风险漏洞，发送和注册广播事件需要调用带有传递权限的接口 TODO applicationId替换-->
-    <permission      android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN"
+    <!--必要权限，解决安全风险漏洞，发送和注册广播事件需要调用带有传递权限的接口-->
+    <permission      android:name="com.hotbitmapgg.ohmybilibili.openadsdk.permission.TT_PANGOLIN"
         android:protectionLevel="signature" />
-    <uses-permission android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN" />
+    <uses-permission android:name="com.hotbitmapgg.ohmybilibili.openadsdk.permission.TT_PANGOLIN" />
 
 
     <!-- 如果视频广告使用textureView播放，请务必添加，否则黑屏 -->
@@ -45,18 +47,23 @@
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
-            android:authorities="${applicationId}.TTFileProvider"
+            android:authorities="com.hotbitmapgg.ohmybilibili.TTFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/file_paths"/>
         </provider>
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="${applicationId}.TTMultiProvider"
+            android:authorities="com.hotbitmapgg.ohmybilibili.TTMultiProvider"
             android:exported="false" />
+
+        <!--<provider
+            android:name="com.bytedance.sdk.dp.act.DPProvider"
+            android:authorities="${applicationId}.BDDPProvider"
+            android:exported="false" />-->
 
         <activity
             android:name="com.hotbitmapgg.bilibili.module.common.SplashActivity"

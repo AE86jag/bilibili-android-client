@@ -1,28 +1,28 @@
 package com.hotbitmapgg.bilibili.module.home.recommend;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
-import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendBannerSection;
+import com.hotbitmapgg.bilibili.adapter.helper.EndlessRecyclerOnScrollListener;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendTopicSection;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendedSection;
 import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.entity.recommend.RecommendInfo;
+import com.hotbitmapgg.bilibili.module.home.discover.ActivityCenterActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
-import com.hotbitmapgg.bilibili.widget.banner.BannerEntity;
 import com.hotbitmapgg.bilibili.widget.sectioned.SectionedRecyclerViewAdapter;
 import com.hotbitmapgg.ohmybilibili.R;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendActivityCenterSection;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendPicSection;
-import com.hotbitmapgg.bilibili.entity.recommend.RecommendBannerInfo;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 
@@ -30,9 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -50,6 +48,12 @@ public class HomeRecommendedFragment extends RxLazyFragment {
     CustomEmptyView mCustomEmptyView;
 
     private boolean mIsRefreshing = false;
+
+    private int pageNum = 1;
+    private int pageSize = 20;
+    private com.hotbitmapgg.bilibili.adapter.helper.EndlessRecyclerOnScrollListener mEndlessRecyclerOnScrollListener;
+    //private View loadMoreView;
+
     private SectionedRecyclerViewAdapter mSectionedAdapter;
     //private List<BannerEntity> banners = new ArrayList<>();
     private List<RecommendInfo.ResultBean> results = new ArrayList<>();
@@ -80,6 +84,11 @@ public class HomeRecommendedFragment extends RxLazyFragment {
         isPrepared = false;
     }
 
+    private void createLoadMoreView() {
+        //loadMoreView = LayoutInflater.from(this.getApplicationContext()).inflate(R.layout.layout_load_more, mRecyclerView, false);
+        //mSectionedAdapter.addFooterView(loadMoreView);
+        //loadMoreView.setVisibility(View.GONE);
+    }
 
     @Override
     protected void initRecyclerView() {
@@ -88,10 +97,13 @@ public class HomeRecommendedFragment extends RxLazyFragment {
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
+                Log.i("TAG", "getSpanSize: position is: " + position);
                 switch (mSectionedAdapter.getSectionItemViewType(position)) {
                     case SectionedRecyclerViewAdapter.VIEW_TYPE_HEADER:
+                        //顶部栏占两列，相当于就是居中显示，总共才两列
                         return 2;
                     case SectionedRecyclerViewAdapter.VIEW_TYPE_FOOTER:
+                        //底部栏占两列，相当于就是居中显示，总共才两列
                         return 2;
                     default:
                         return 1;
@@ -100,7 +112,19 @@ public class HomeRecommendedFragment extends RxLazyFragment {
         });
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mSectionedAdapter);
+
+
+        createLoadMoreView();
         setRecycleNoScroll();
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                Log.i("hhhh", "onLoadMore: ");
+                pageNum++;
+                loadData();
+                //loadMoreView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
 
@@ -113,6 +137,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
             loadData();
         });
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            pageNum = 1;
             clearData();
             loadData();
         });
@@ -123,6 +148,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
         RetrofitHelper
                 .getBiliAppAPI()
                 //.getRecommendedBannerInfo()
+                //TODO 传Page和Size
                 .getRecommendedInfo()
                 .compose(bindToLifecycle())
                 .map(RecommendInfo::getResult)
@@ -157,9 +183,12 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
     @Override
     protected void finishTask() {
+
         mSwipeRefreshLayout.setRefreshing(false);
+
         mIsRefreshing = false;
         hideEmptyView();
+        //loadMoreView.setVisibility(View.GONE);
         //convertBanner();
         //mSectionedAdapter.addSection(new HomeRecommendBannerSection(banners));
         int size = results.size();
@@ -198,7 +227,12 @@ public class HomeRecommendedFragment extends RxLazyFragment {
                         results.get(i).getBody().get(0).getParam()));
             }
         }
-        mSectionedAdapter.notifyDataSetChanged();
+
+        if (pageNum * pageSize - pageSize - 1 > 0) {
+            mSectionedAdapter.notifyItemRangeChanged(pageNum * pageSize - pageSize - 1, pageSize);
+        } else {
+            mSectionedAdapter.notifyDataSetChanged();
+        }
     }
 
 
