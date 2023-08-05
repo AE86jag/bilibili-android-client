@@ -28,25 +28,6 @@
             android:layout_marginTop="30dp"
             android:gravity="bottom"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/et_drama_index"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:text="10"
-                android:textColor="#f00"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/btn_go"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="跳转到指定集数"
-                android:textSize="13sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -55,25 +36,6 @@
             android:layout_marginTop="30dp"
             android:gravity="bottom"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/et_drama_msec"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:text="10"
-                android:textColor="#f00"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/btn_go_msec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="跳转到指定毫秒数"
-                android:textSize="13sp" />
-
         </LinearLayout>
 
 

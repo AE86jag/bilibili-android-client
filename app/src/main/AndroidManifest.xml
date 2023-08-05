@@ -237,7 +237,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/ColorTranslucentTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
+        <activity android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:name="com.hotbitmapgg.bilibili.module.drama.MyDramaApiDetailActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

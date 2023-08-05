@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.bytedance.sdk.dp.DPDrama;
 import com.bytedance.sdk.dp.DPDramaDetailConfig;
@@ -27,6 +28,7 @@ import com.bytedance.sdk.dp.DPWidgetDramaDetailParams;
 import com.bytedance.sdk.dp.IDPAdListener;
 import com.bytedance.sdk.dp.IDPDramaListener;
 import com.bytedance.sdk.dp.IDPWidget;
+import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.ohmybilibili.R;
 
 import java.util.ArrayList;
@@ -58,24 +60,14 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
     private Map<Long, Integer> mUnlockIndexMap = new HashMap<>();
 
     // 已经解锁的集数
-    private  Map<Long, List<Integer>> mHasUnlockIndexMap = new HashMap<>();
+    private Map<Long, List<Integer>> mHasUnlockIndexMap = new HashMap<>();
 
     //解锁时的全局阴影
-    @BindView(R.id.block_view)
-    private View blockView;
+    View blockView;
     //解锁按钮
-    @BindView(R.id.unlock)
-    private Button unlockBtn;
+    Button unlockBtn;
     //解锁时离开按钮
-    @BindView(R.id.leave)
-    private Button leaveBtn;
-
-    //跳转到指定集数输入框
-    @BindView(R.id.et_drama_index)
-    private EditText indexEt = null;
-    //跳转到指定集数的按钮
-    @BindView(R.id.btn_go)
-    private Button goBtn = null;
+    Button leaveBtn;
 
     //private var sp = BaseApplication.instance.getSharedPreferences("pangrowth_demo", Context.MODE_PRIVATE)
 
@@ -97,9 +89,9 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
     private String mode = DPDramaDetailConfig.SPECIFIC_DETAIL;
 
     //private val isFromCard by lazy { getIntent()?.getBooleanExtra(IS_FROM_CARD, false) ?: false }
-    private Long fromGid = getIntent() != null ? getIntent().getLongExtra(FROM_GID, -1L) : null;
+    //private Long fromGid = getIntent() != null ? getIntent().getLongExtra(FROM_GID, -1L) : null;
 
-    public long getFromGid() {
+    public Long getFromGid() {
         Intent intent = getIntent();
         return intent != null ? intent.getLongExtra(FROM_GID, -1L) : null;
     }
@@ -108,11 +100,13 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drama_activity_api_detail);
-
+        blockView = findViewById(R.id.block_view);
         if (blockView != null) {
             blockView.setClickable(true);
             blockView.setVisibility(View.GONE);
         }
+        unlockBtn = findViewById(R.id.unlock);
+        leaveBtn = findViewById(R.id.leave);
         //outerDrama在列表页，点击单个短剧进入详情时已经赋值
         drama = outerDrama;
         //设置每个短剧已解锁的集数序号
@@ -178,7 +172,7 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
                             .id(drama.id)
                             .index(drama.index)
                             .currentDuration(currentDuration)
-                            .fromGid(fromGid.toString()) // 必传，否则影响推荐效果
+                            .fromGid(getFromGid().toString()) // 必传，否则影响推荐效果
                             .from(enterFrom) // 必传，否则影响推荐效果
             );
         }
