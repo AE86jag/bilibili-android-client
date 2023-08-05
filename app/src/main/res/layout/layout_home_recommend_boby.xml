@@ -16,10 +16,11 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/card_default_height">
 
+        <!--短剧列表图片-->
         <ImageView
             android:id="@+id/video_preview"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="240dp"
             android:scaleType="center" />
 
         <LinearLayout
@@ -30,6 +31,7 @@
             android:orientation="horizontal"
             android:padding="@dimen/card_title_margin">
 
+            <!--短剧标题-->
             <TextView
                 android:id="@+id/video_title"
                 android:layout_width="wrap_content"
@@ -50,7 +52,7 @@
             android:orientation="horizontal"
             android:paddingBottom="@dimen/default_tiny_padding">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="@dimen/video_info_mini_icons_size"
                 android:layout_height="@dimen/video_info_mini_icons_size"
                 android:layout_marginStart="@dimen/default_general_margin"
@@ -73,7 +75,8 @@
                 android:layout_width="@dimen/video_info_mini_icons_size"
                 android:layout_height="@dimen/video_info_mini_icons_size"
                 android:layout_marginStart="@dimen/default_general_margin"
-                android:src="@drawable/ic_subtitles_black_24dp" />
+                android:src="@drawable/ic_subtitles_black_24dp" />-->
+            <!--短剧标题下面的描述-->
             <TextView
                 android:id="@+id/video_review_count"
                 android:layout_width="wrap_content"
