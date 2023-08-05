@@ -34,6 +34,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
     if (fragments[position] == null) {
+      //TODO 这里不是动态和配置文件一致，数量不一致会导致应用起不来
       switch (position) {
         case 0:
           fragments[position] = HomeLiveFragment.newIntance();
@@ -52,6 +53,9 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
           break;
         case 5:
           fragments[position] = HomeDiscoverFragment.newInstance();
+          break;
+        case 6:
+          fragments[position] = HomeRegionFragment.newInstance();
           break;
         default:
           break;

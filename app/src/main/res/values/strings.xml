@@ -2,12 +2,13 @@
 <resources>
 
     <string-array name="sections">
-        <item>@string/section_live</item>
-        <item>@string/section_recommend</item>
-        <item>@string/section_bangumi</item>
-        <item>@string/section_more</item>
-        <item>@string/section_focus</item>
-        <item>@string/section_discover</item>
+        <item>@string/drama_recommend</item>
+        <item>@string/drama_family</item>
+        <item>@string/drama_gz</item>
+        <item>@string/drama_kh</item>
+        <item>@string/drama_zc</item>
+        <item>@string/drama_nl</item>
+        <item>@string/drama_more</item>
     </string-array>
 
     <string name="app_name">哔哩哔哩</string>
@@ -121,6 +122,16 @@
     <string name="about_developers">关于我</string>
     <string name="about">关于哔哩哔哩</string>
     <string name="about_version">V1.0</string>
+
+    <!-- 短剧常量 -->
+
+    <string name="drama_recommend">推荐</string>
+    <string name="drama_family">家庭</string>
+    <string name="drama_gz">古装</string>
+    <string name="drama_kh">科幻</string>
+    <string name="drama_zc">总裁</string>
+    <string name="drama_nl">虐恋</string>
+    <string name="drama_more">更多</string>
 
 
     <!--哔哩哔哩-->

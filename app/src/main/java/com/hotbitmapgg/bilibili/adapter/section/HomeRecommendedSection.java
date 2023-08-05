@@ -345,29 +345,29 @@ public class HomeRecommendedSection extends StatelessSection {
         }
     }
 
-    static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.card_view)
-        CardView mCardView;
+        public CardView mCardView;
         @BindView(R.id.video_preview)
-        ImageView mVideoImg;
+        public ImageView mVideoImg;
         @BindView(R.id.video_title)
-        TextView mVideoTitle;
+        public TextView mVideoTitle;
        /* @BindView(R.id.video_play_num)
         TextView mVideoPlayNum;*/
         @BindView(R.id.video_review_count)
-        TextView mVideoReviewCount;
+        public TextView mVideoReviewCount;
         @BindView(R.id.layout_live)
-        RelativeLayout mLiveLayout;
+        public RelativeLayout mLiveLayout;
         @BindView(R.id.layout_video)
-        LinearLayout mVideoLayout;
+        public LinearLayout mVideoLayout;
         @BindView(R.id.item_live_up)
-        TextView mLiveUp;
+        public TextView mLiveUp;
         @BindView(R.id.item_live_online)
-        TextView mLiveOnline;
+        public TextView mLiveOnline;
         @BindView(R.id.layout_bangumi)
-        RelativeLayout mBangumiLayout;
+        public RelativeLayout mBangumiLayout;
         @BindView(R.id.item_bangumi_update)
-        TextView mBangumiUpdate;
+        public TextView mBangumiUpdate;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
