@@ -10,7 +10,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
+import com.bytedance.sdk.dp.DPDrama;
+import com.bytedance.sdk.dp.DPSdk;
+import com.bytedance.sdk.dp.IDPWidgetFactory;
 import com.hotbitmapgg.bilibili.adapter.helper.EndlessRecyclerOnScrollListener;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendTopicSection;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendedSection;
@@ -28,6 +32,7 @@ import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import rx.android.schedulers.AndroidSchedulers;
@@ -50,14 +55,16 @@ public class HomeRecommendedFragment extends RxLazyFragment {
     private boolean mIsRefreshing = false;
 
     private int pageNum = 1;
-    private int pageSize = 20;
+    private int pageSize = 10;
     private com.hotbitmapgg.bilibili.adapter.helper.EndlessRecyclerOnScrollListener mEndlessRecyclerOnScrollListener;
     //private View loadMoreView;
 
     private SectionedRecyclerViewAdapter mSectionedAdapter;
     //private List<BannerEntity> banners = new ArrayList<>();
-    private List<RecommendInfo.ResultBean> results = new ArrayList<>();
+    private List<DPDrama> results = new ArrayList<>();
     //private List<RecommendBannerInfo.DataBean> recommendBanners = new ArrayList<>();
+
+    private static final String TAG = "HomeRecommendedFragment";
 
     public static HomeRecommendedFragment newInstance() {
         return new HomeRecommendedFragment();
@@ -145,14 +152,35 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
     @Override
     protected void loadData() {
-        RetrofitHelper
+        if (DPSdk.isStartSuccess()) {
+            DPSdk.factory().requestAllDrama(pageNum, pageSize, true, new IDPWidgetFactory.DramaCallback() {
+                @Override
+                public void onError(int i, String s) {
+                    initEmptyView();
+                    Log.d(TAG, "request failed, code = $code, msg = $msg");
+                }
+
+                @Override
+                public void onSuccess(List<? extends DPDrama> list, Map<String, Object> map) {
+                    Log.d(TAG, "request success, drama size = " + (list == null ? 0 : list.size()));
+                    if (list != null && list.size() > 0) {
+                        results.addAll(list);
+                    }
+                    finishTask();
+                }
+            });
+        } else {
+            Toast.makeText(this.getApplicationContext(), "sdk还未初始化", Toast.LENGTH_SHORT).show();
+        }
+
+        /*RetrofitHelper
                 .getBiliAppAPI()
                 //.getRecommendedBannerInfo()
                 //TODO 传Page和Size
                 .getRecommendedInfo()
                 .compose(bindToLifecycle())
                 .map(RecommendInfo::getResult)
-               /* .flatMap(new Func1<List<RecommendBannerInfo.DataBean>, Observable<RecommendInfo>>() {
+               *//* .flatMap(new Func1<List<RecommendBannerInfo.DataBean>, Observable<RecommendInfo>>() {
                     @Override
                     public Observable<RecommendInfo> call(List<RecommendBannerInfo.DataBean> dataBeans) {
                         //recommendBanners.addAll(dataBeans);
@@ -160,13 +188,13 @@ public class HomeRecommendedFragment extends RxLazyFragment {
                     }
                 })
                 .compose(bindToLifecycle())
-                .map(RecommendInfo::getResult)*/
+                .map(RecommendInfo::getResult)*//*
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(resultBeans -> {
                     results.addAll(resultBeans);
                     finishTask();
-                }, throwable -> initEmptyView());
+                }, throwable -> initEmptyView());*/
     }
 
 
@@ -191,7 +219,11 @@ public class HomeRecommendedFragment extends RxLazyFragment {
         //loadMoreView.setVisibility(View.GONE);
         //convertBanner();
         //mSectionedAdapter.addSection(new HomeRecommendBannerSection(banners));
-        int size = results.size();
+
+        mSectionedAdapter.addSection(new HomeRecommendedSection(
+                getActivity(), null, "type",0, results));
+
+        /*int size = results.size();
         for (int i = 0; i < size; i++) {
             String type = results.get(i).getType();
             if (!TextUtils.isEmpty(type)) {
@@ -226,7 +258,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
                         results.get(i).getBody().get(0).getCover(),
                         results.get(i).getBody().get(0).getParam()));
             }
-        }
+        }*/
 
         if (pageNum * pageSize - pageSize - 1 > 0) {
             mSectionedAdapter.notifyItemRangeChanged(pageNum * pageSize - pageSize - 1, pageSize);

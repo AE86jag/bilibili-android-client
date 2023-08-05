@@ -1,5 +1,7 @@
 package com.hotbitmapgg.bilibili.adapter.section;
 
+import static com.bytedance.sdk.dp.DPDrama.STATUS_DRAMA_FINISHED;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
@@ -18,10 +21,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bytedance.sdk.dp.DPDrama;
+import com.bytedance.sdk.dp.DPDramaDetailConfig;
+import com.bytedance.sdk.dp.DPSdk;
+import com.bytedance.sdk.dp.DPWidgetDramaDetailParams;
+import com.bytedance.sdk.dp.IDPWidgetFactory;
 import com.hotbitmapgg.bilibili.entity.recommend.RecommendInfo;
+import com.hotbitmapgg.bilibili.module.drama.DramaApiDetailActivity;
 import com.hotbitmapgg.bilibili.module.home.live.LivePlayerActivity;
 import com.hotbitmapgg.ohmybilibili.R;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiIndexActivity;
@@ -33,6 +43,7 @@ import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -54,7 +65,7 @@ public class HomeRecommendedSection extends StatelessSection {
     private static final String TYPE_BANGUMI = "bangumi_2";
     private static final String GOTO_BANGUMI = "bangumi_list";
     private static final String TYPE_ACTIVITY = "activity";
-    private List<RecommendInfo.ResultBean.BodyBean> datas = new ArrayList<>();
+    private List<DPDrama> datas = new ArrayList<>();
     private final Random mRandom;
     private int[] icons = new int[]{
             R.drawable.ic_header_hot, R.drawable.ic_head_live,
@@ -65,9 +76,18 @@ public class HomeRecommendedSection extends StatelessSection {
             R.drawable.ic_category_t155, R.drawable.ic_category_t5,
             R.drawable.ic_category_t11, R.drawable.ic_category_t23
     };
+    public static final String TAG = "HomeRecommendedSection";
+    public static final String KEY_DRAMA_UNLOCK_INDEX = "key_drama_unlock_index";
+    public static final String KEY_DRAMA_HISTORY = "drama_history";
+    public static final String KEY_DRAMA_MODE = "key_drama_mode";
+    public static final String KEY_DRAMA_FREE_SET = "key_drama_free_set";
+    public static final String KEY_DRAMA_LOCK_SET = "key_drama_lock_set";
+    public static final String KEY_DRAMA_CURRENT_DURATION = "drama_current_duration";
+    public static final String KEY_DRAMA_INFINITE_SCROLL_ENABLED = "key_drama_infinite_scroll_enabled";
+    public static final String KEY_DRAMA_CUSTOM_REPORT_ENABLED = "key_drama_custom_report_enabled";
+    public static final String KEY_DRAMA_HIDE_LEFT_TOP_TIPS = "key_drama_hide_left_top_tips";
 
-
-    public HomeRecommendedSection(Context context, String title, String type, int liveCount, List<RecommendInfo.ResultBean.BodyBean> datas) {
+    public HomeRecommendedSection(Context context, String title, String type, int liveCount, List<DPDrama> datas) {
         //super(R.layout.layout_home_recommend_head, R.layout.layout_home_recommend_foot, R.layout.layout_home_recommend_boby);
         super(R.layout.layout_home_recommend_boby);
         this.mContext = context;
@@ -94,66 +114,73 @@ public class HomeRecommendedSection extends StatelessSection {
     @Override
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-        final RecommendInfo.ResultBean.BodyBean bodyBean = datas.get(position);
+        final DPDrama drama = datas.get(position);
 
         Glide.with(mContext)
-                .load(Uri.parse(bodyBean.getCover()))
+                .load(Uri.parse(drama.coverImage))
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.bili_default_image_tv)
                 .dontAnimate()
                 .into(itemViewHolder.mVideoImg);
 
-        itemViewHolder.mVideoTitle.setText(bodyBean.getTitle());
+        itemViewHolder.mVideoTitle.setText(drama.title);
         itemViewHolder.mCardView.setOnClickListener(v -> {
-            String gotoX = bodyBean.getGotoX();
-            switch (gotoX) {
-                case TYPE_LIVE:
-                    LivePlayerActivity.launch((Activity) mContext,
-                            Integer.valueOf(bodyBean.getParam()), bodyBean.getTitle(),
-                            bodyBean.getOnline(), bodyBean.getUpFace(), bodyBean.getUp(), 0);
-                    break;
-                case GOTO_BANGUMI:
-                    break;
-                default:
-                    VideoDetailsActivity.launch((Activity) mContext,
-                            Integer.parseInt(bodyBean.getParam()), bodyBean.getCover());
-                    break;
+            List<Long> ids = new ArrayList<>();
+            ids.add(drama.id);
+            Log.i(TAG, "onBindItemViewHolder: " + ids);
+            if (DPSdk.isStartSuccess()) {
+                int index = 1;
+                int unlockIndex = 1;
+                int duration = 0;
+                int freeSet = -1;
+                int lockSet = -1;
+                DPSdk.factory().requestDrama(ids, new IDPWidgetFactory.DramaCallback() {
+                    @Override
+                    public void onError(int i, String s) {
+                        Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "request failed, code = " + i + ", msg = " + s);
+                    }
+
+                    @Override
+                    public void onSuccess(List<? extends DPDrama> list, Map<String, Object> map) {
+                        if (list == null || list.size() == 0) {
+                            return;
+                        }
+                        DPDrama dramaItem = list.get(0);
+                        dramaItem.index = index;
+
+                        //TODO mContext设置是否合理
+                        Intent intent = new Intent(mContext, DramaApiDetailActivity.class);
+                        DramaApiDetailActivity.Companion.setOuterDrama(dramaItem);
+                        DramaApiDetailActivity.Companion.setEnterFrom(DPWidgetDramaDetailParams.DPDramaEnterFrom.DEFAULT);
+                        intent.putExtra(KEY_DRAMA_UNLOCK_INDEX, unlockIndex);
+                        //封装模式，弹出激励视频、上拉查看选择集数
+                        intent.putExtra(KEY_DRAMA_MODE, DPDramaDetailConfig.COMMON_DETAIL);
+                        intent.putExtra(KEY_DRAMA_FREE_SET, freeSet);
+                        intent.putExtra(KEY_DRAMA_LOCK_SET, lockSet);
+                        intent.putExtra(KEY_DRAMA_CURRENT_DURATION, duration);
+                        intent.putExtra(KEY_DRAMA_INFINITE_SCROLL_ENABLED, true);
+                        intent.putExtra(KEY_DRAMA_CUSTOM_REPORT_ENABLED, false);
+                        intent.putExtra(KEY_DRAMA_HIDE_LEFT_TOP_TIPS, false);
+                        mContext.startActivity(intent);
+                    }
+                });
             }
+
+            /*VideoDetailsActivity.launch((Activity) mContext,
+                    Integer.parseInt(bodyBean.getParam()), bodyBean.getCover());*/
+
+
         });
 
-        switch (type) {
-            case TYPE_LIVE:
-                //直播item
-               itemViewHolder.mLiveLayout.setVisibility(View.VISIBLE);
-                itemViewHolder.mVideoLayout.setVisibility(View.GONE);
-                itemViewHolder.mBangumiLayout.setVisibility(View.GONE);
-                itemViewHolder.mLiveUp.setText(bodyBean.getUp());
-                itemViewHolder.mLiveOnline.setText(String.valueOf(bodyBean.getOnline()));
-                break;
-            case TYPE_BANGUMI:
-                // 番剧item
-                itemViewHolder.mLiveLayout.setVisibility(View.GONE);
-                itemViewHolder.mVideoLayout.setVisibility(View.GONE);
-                itemViewHolder.mBangumiLayout.setVisibility(View.VISIBLE);
-                itemViewHolder.mBangumiUpdate.setText(bodyBean.getDesc1());
-                break;
-            case TYPE_ACTIVITY:
-                ViewGroup.LayoutParams layoutParams = itemViewHolder.mCardView.getLayoutParams();
-                layoutParams.height = DisplayUtil.dp2px(mContext, 200f);
-                itemViewHolder.mCardView.setLayoutParams(layoutParams);
-                itemViewHolder.mLiveLayout.setVisibility(View.GONE);
-                itemViewHolder.mVideoLayout.setVisibility(View.GONE);
-                itemViewHolder.mBangumiLayout.setVisibility(View.GONE);
-                break;
-            default:
-                itemViewHolder.mLiveLayout.setVisibility(View.GONE);
-                itemViewHolder.mBangumiLayout.setVisibility(View.GONE);
-                itemViewHolder.mVideoLayout.setVisibility(View.VISIBLE);
-                //itemViewHolder.mVideoPlayNum.setText(bodyBean.getPlay());
-                itemViewHolder.mVideoReviewCount.setText(bodyBean.getDanmaku());
-                break;
-        }
+        itemViewHolder.mLiveLayout.setVisibility(View.GONE);
+        itemViewHolder.mBangumiLayout.setVisibility(View.GONE);
+        itemViewHolder.mVideoLayout.setVisibility(View.VISIBLE);
+        //itemViewHolder.mVideoPlayNum.setText(bodyBean.getPlay());
+        //根据总集数total，完结状态status，拼接
+        String description = (drama.status == STATUS_DRAMA_FINISHED ? "已完结" : "未完结") + "共" + drama.total + "集";
+        itemViewHolder.mVideoReviewCount.setText(description);
     }
 
 
