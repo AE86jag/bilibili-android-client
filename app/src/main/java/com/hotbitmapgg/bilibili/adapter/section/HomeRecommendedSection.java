@@ -30,9 +30,7 @@ import com.bytedance.sdk.dp.DPDramaDetailConfig;
 import com.bytedance.sdk.dp.DPSdk;
 import com.bytedance.sdk.dp.DPWidgetDramaDetailParams;
 import com.bytedance.sdk.dp.IDPWidgetFactory;
-import com.hotbitmapgg.bilibili.entity.recommend.RecommendInfo;
-import com.hotbitmapgg.bilibili.module.drama.DramaApiDetailActivity;
-import com.hotbitmapgg.bilibili.module.home.live.LivePlayerActivity;
+import com.hotbitmapgg.bilibili.module.drama.MyDramaApiDetailActivity;
 import com.hotbitmapgg.ohmybilibili.R;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiIndexActivity;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiScheduleActivity;
@@ -151,9 +149,9 @@ public class HomeRecommendedSection extends StatelessSection {
                         dramaItem.index = index;
 
                         //TODO mContext设置是否合理
-                        Intent intent = new Intent(mContext, DramaApiDetailActivity.class);
-                        DramaApiDetailActivity.Companion.setOuterDrama(dramaItem);
-                        DramaApiDetailActivity.Companion.setEnterFrom(DPWidgetDramaDetailParams.DPDramaEnterFrom.DEFAULT);
+                        Intent intent = new Intent(mContext, MyDramaApiDetailActivity.class);
+                        MyDramaApiDetailActivity.outerDrama = dramaItem;
+                        MyDramaApiDetailActivity.enterFrom = DPWidgetDramaDetailParams.DPDramaEnterFrom.DEFAULT;
                         intent.putExtra(KEY_DRAMA_UNLOCK_INDEX, unlockIndex);
                         //封装模式，弹出激励视频、上拉查看选择集数
                         intent.putExtra(KEY_DRAMA_MODE, DPDramaDetailConfig.COMMON_DETAIL);
