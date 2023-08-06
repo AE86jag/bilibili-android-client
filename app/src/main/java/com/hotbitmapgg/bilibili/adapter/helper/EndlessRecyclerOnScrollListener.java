@@ -24,7 +24,6 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        Log.i("A", "onScrolled: dx: " + dx + ", dy: " + dy);
         super.onScrolled(recyclerView, dx, dy);
         if (dy == 0) {
             return;

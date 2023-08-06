@@ -1,14 +1,10 @@
-package com.hotbitmapgg.bilibili.module.home.recommend;
+package com.hotbitmapgg.bilibili.module.home.drama;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,35 +12,27 @@ import com.bytedance.sdk.dp.DPDrama;
 import com.bytedance.sdk.dp.DPSdk;
 import com.bytedance.sdk.dp.IDPWidgetFactory;
 import com.hotbitmapgg.bilibili.adapter.helper.EndlessRecyclerOnScrollListener;
-import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendTopicSection;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendedSection;
 import com.hotbitmapgg.bilibili.base.RxLazyFragment;
-import com.hotbitmapgg.bilibili.entity.recommend.RecommendInfo;
-import com.hotbitmapgg.bilibili.module.home.discover.ActivityCenterActivity;
-import com.hotbitmapgg.bilibili.utils.ConstantUtil;
+import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
+import com.hotbitmapgg.bilibili.widget.drama.DramaListAdapter;
 import com.hotbitmapgg.bilibili.widget.sectioned.SectionedRecyclerViewAdapter;
 import com.hotbitmapgg.ohmybilibili.R;
-import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendActivityCenterSection;
-import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendPicSection;
-import com.hotbitmapgg.bilibili.network.RetrofitHelper;
-import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by hcc on 16/8/4 11:58
  * 100332338@qq.com
  * <p/>
- * 主页推荐界面
+ * 首页短剧具体类型列表
  */
-public class HomeRecommendedFragment extends RxLazyFragment {
+public class DramaTypeListFragment extends RxLazyFragment {
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.recycle)
@@ -56,7 +44,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
     private int pageNum = 1;
     private final int pageSize = 10;
-    private com.hotbitmapgg.bilibili.adapter.helper.EndlessRecyclerOnScrollListener mEndlessRecyclerOnScrollListener;
+    private EndlessRecyclerOnScrollListener mEndlessRecyclerOnScrollListener;
     //private View loadMoreView;
 
     private SectionedRecyclerViewAdapter mSectionedAdapter;
@@ -64,10 +52,17 @@ public class HomeRecommendedFragment extends RxLazyFragment {
     private List<DPDrama> results = new ArrayList<>();
     //private List<RecommendBannerInfo.DataBean> recommendBanners = new ArrayList<>();
 
-    private static final String TAG = "HomeRecommendedFragment";
+    private static final String TAG = "DramaTypeListFragment";
 
-    public static HomeRecommendedFragment newInstance() {
-        return new HomeRecommendedFragment();
+    private String typeName;
+
+    public DramaTypeListFragment() {
+    }
+
+    public static DramaTypeListFragment newInstance(String typeName) {
+        DramaTypeListFragment fragment = new DramaTypeListFragment();
+        fragment.typeName = typeName;
+        return fragment;
     }
 
     @Override
@@ -152,7 +147,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
     @Override
     protected void loadData() {
         if (DPSdk.isStartSuccess()) {
-            DPSdk.factory().requestAllDrama(pageNum, pageSize, true, new IDPWidgetFactory.DramaCallback() {
+            DPSdk.factory().requestDramaByCategory(typeName, pageNum, pageSize, new IDPWidgetFactory.DramaCallback() {
                 @Override
                 public void onError(int i, String s) {
                     initEmptyView();
@@ -161,7 +156,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
                 @Override
                 public void onSuccess(List<? extends DPDrama> list, Map<String, Object> map) {
-                    Log.d(TAG, "request success, drama size = " + (list == null ? 0 : list.size()));
+                    Log.i(TAG, "request success, drama size = " + (list == null ? 0 : list.size()));
                     if (list != null && list.size() > 0) {
                         results.addAll(list);
                     }
@@ -169,31 +164,9 @@ public class HomeRecommendedFragment extends RxLazyFragment {
                 }
             });
         } else {
-            Toast.makeText(this.getApplicationContext(), "sdk还未初始化", Toast.LENGTH_SHORT).show();
+            initEmptyView();
+            Log.e(TAG, "sdk is not init");
         }
-
-        /*RetrofitHelper
-                .getBiliAppAPI()
-                //.getRecommendedBannerInfo()
-                //TODO 传Page和Size
-                .getRecommendedInfo()
-                .compose(bindToLifecycle())
-                .map(RecommendInfo::getResult)
-               *//* .flatMap(new Func1<List<RecommendBannerInfo.DataBean>, Observable<RecommendInfo>>() {
-                    @Override
-                    public Observable<RecommendInfo> call(List<RecommendBannerInfo.DataBean> dataBeans) {
-                        //recommendBanners.addAll(dataBeans);
-                        return RetrofitHelper.getBiliAppAPI().getRecommendedInfo();
-                    }
-                })
-                .compose(bindToLifecycle())
-                .map(RecommendInfo::getResult)*//*
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(resultBeans -> {
-                    results.addAll(resultBeans);
-                    finishTask();
-                }, throwable -> initEmptyView());*/
     }
 
 

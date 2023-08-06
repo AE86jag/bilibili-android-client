@@ -3,6 +3,7 @@ package com.hotbitmapgg.bilibili.module.common;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.hotbitmapgg.bilibili.module.home.index.BottomTabLayoutActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
 import com.hotbitmapgg.bilibili.utils.SystemUiVisibilityUtil;
@@ -46,7 +47,7 @@ public class SplashActivity extends RxActivity {
     private void finishTask() {
         boolean isLogin = PreferenceUtil.getBoolean(ConstantUtil.KEY, false);
         if (isLogin) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, BottomTabLayoutActivity.class));
         } else {
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         }

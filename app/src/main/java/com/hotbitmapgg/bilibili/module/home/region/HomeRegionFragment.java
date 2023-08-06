@@ -38,7 +38,7 @@ import rx.schedulers.Schedulers;
  * Created by hcc on 16/8/4 21:18
  * 100332338@qq.com
  * <p/>
- * 首页分区界面
+ * 首页顶部更多TAB页
  */
 public class HomeRegionFragment extends RxLazyFragment {
     @BindView(R.id.recycle)
@@ -80,6 +80,7 @@ public class HomeRegionFragment extends RxLazyFragment {
 
                 @Override
                 public void onSuccess(List<String> list) {
+                    Log.d(TAG, "request dramas size is:" + list.size());
                     regionTypes.addAll(list);
                 }
             });

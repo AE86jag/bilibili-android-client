@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.hotbitmapgg.bilibili.module.home.attention.HomeAttentionFragment;
 import com.hotbitmapgg.bilibili.module.home.bangumi.HomeBangumiFragment;
 import com.hotbitmapgg.bilibili.module.home.discover.HomeDiscoverFragment;
+import com.hotbitmapgg.bilibili.module.home.drama.DramaTypeListFragment;
 import com.hotbitmapgg.bilibili.module.home.live.HomeLiveFragment;
 import com.hotbitmapgg.bilibili.module.home.recommend.HomeRecommendedFragment;
 import com.hotbitmapgg.bilibili.module.home.region.HomeRegionFragment;
@@ -22,7 +23,7 @@ import com.hotbitmapgg.ohmybilibili.R;
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
   private final String[] TITLES;
-  private Fragment[] fragments;
+  private final Fragment[] fragments;
 
   public HomePagerAdapter(FragmentManager fm, Context context) {
     super(fm);
@@ -34,32 +35,18 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
     if (fragments[position] == null) {
-      //TODO 这里不是动态和配置文件一致，数量不一致会导致应用起不来
-      switch (position) {
-        case 0:
-          fragments[position] = HomeLiveFragment.newIntance();
-          break;
-        case 1:
-          fragments[position] = HomeRecommendedFragment.newInstance();
-          break;
-        case 2:
-          fragments[position] = HomeBangumiFragment.newInstance();
-          break;
-        case 3:
-          fragments[position] = HomeRegionFragment.newInstance();
-          break;
-        case 4:
-          fragments[position] = HomeAttentionFragment.newInstance();
-          break;
-        case 5:
-          fragments[position] = HomeDiscoverFragment.newInstance();
-          break;
-        case 6:
-          fragments[position] = HomeRegionFragment.newInstance();
-          break;
-        default:
-          break;
+      if (position == 0) {
+        fragments[0] = HomeRecommendedFragment.newInstance();
+        return fragments[0];
       }
+
+      if (position == 6) {
+        fragments[6] = HomeRegionFragment.newInstance();
+        return fragments[6];
+      }
+
+      fragments[position] = DramaTypeListFragment.newInstance(TITLES[position]);
+      return fragments[position];
     }
     return fragments[position];
   }

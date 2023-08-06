@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.module.common.MainActivity;
 import com.hotbitmapgg.bilibili.module.entry.GameCentreActivity;
 import com.hotbitmapgg.bilibili.module.entry.OffLineDownloadActivity;
+import com.hotbitmapgg.bilibili.module.home.index.BottomTabLayoutActivity;
 import com.hotbitmapgg.bilibili.module.search.TotalStationSearchActivity;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.ohmybilibili.R;
@@ -67,7 +69,14 @@ public class HomePageFragment extends RxLazyFragment {
 
     private void initToolBar() {
         mToolbar.setTitle("");
-        ((MainActivity) getActivity()).setSupportActionBar(mToolbar);
+        FragmentActivity activity = getActivity();
+        //现在HomePageFragment嵌入到BottomTabLayoutActivity，以前是在MainActivity里面
+        if (activity instanceof MainActivity) {
+            ((MainActivity)activity).setSupportActionBar(mToolbar);
+        } else if (activity instanceof BottomTabLayoutActivity) {
+            ((BottomTabLayoutActivity)activity).setSupportActionBar(mToolbar);
+        }
+
         mCircleImageView.setImageResource(R.drawable.ic_hotbitmapgg_avatar);
     }
 
@@ -96,7 +105,8 @@ public class HomePageFragment extends RxLazyFragment {
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.setAdapter(mHomeAdapter);
         mSlidingTab.setViewPager(mViewPager);
-        mViewPager.setCurrentItem(1);
+        //首页顶部TAB初始位置
+        mViewPager.setCurrentItem(0);
     }
 
     @Override
