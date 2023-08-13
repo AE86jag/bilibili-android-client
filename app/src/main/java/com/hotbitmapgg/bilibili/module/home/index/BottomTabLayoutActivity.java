@@ -48,6 +48,7 @@ import com.hotbitmapgg.bilibili.module.home.attention.HomeAttentionFragment;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
+import com.hotbitmapgg.bilibili.utils.ToastUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.ohmybilibili.R;
 
@@ -111,18 +112,8 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
                         .adListener(drawAdListener) // 混排流内广告监听
                 );
 
-        IFavoritesFragment mFavoritesFragment = IFavoritesFragment.newInstance();
-        HistoryFragment mHistoryFragment = HistoryFragment.newInstance();
-        AttentionPeopleFragment mAttentionPeopleFragment = AttentionPeopleFragment.newInstance();
-        ConsumeHistoryFragment mConsumeHistoryFragment = ConsumeHistoryFragment.newInstance();
-        SettingFragment mSettingFragment = SettingFragment.newInstance();
-
         mFragmensts = new Fragment[] {
-                HomePageFragment.newInstance(), idpWidget.getFragment(), mFavoritesFragment,
-                mHistoryFragment,
-                mAttentionPeopleFragment,
-                mConsumeHistoryFragment,
-                mSettingFragment
+                HomePageFragment.newInstance(), idpWidget.getFragment()
         };
 
         initView();
@@ -183,7 +174,6 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
 
     private void initView() {
         mTabLayout = findViewById(R.id.bottom_tab_layout);
-        //TODO 这两个都为null，因为布局文件里面没有
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.navigation_view);
 
@@ -614,48 +604,15 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
         if (mDrawerLayout == null) {
             return true;
         }
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        switch (item.getItemId()) {
-            case R.id.item_home:
-                // 主页
-                changeFragmentIndex(item, 0);
-                return true;
-            case R.id.item_download:
-                // 离线缓存
-                startActivity(new Intent(BottomTabLayoutActivity.this, OffLineDownloadActivity.class));
-                return true;
-            case R.id.item_vip:
-                //大会员
-                startActivity(new Intent(BottomTabLayoutActivity.this, VipActivity.class));
-                return true;
-            case R.id.item_favourite:
-                // 我的收藏
-                changeFragmentIndex(item, 1);
-                return true;
-            case R.id.item_history:
-                // 历史记录
-                changeFragmentIndex(item, 2);
-                return true;
-            case R.id.item_group:
-                // 关注的人
-                changeFragmentIndex(item, 3);
-                return true;
-            case R.id.item_tracker:
-                // 我的钱包
-                changeFragmentIndex(item, 4);
-                return true;
-            case R.id.item_theme:
-                // 主题选择
-                return true;
-            case R.id.item_app:
-                // 应用推荐
-                return true;
-            case R.id.item_settings:
-                // 设置中心
-                changeFragmentIndex(item, 5);
-                return true;
+        // TODO 功能开放后打开
+        // mDrawerLayout.closeDrawer(GravityCompat.START);
+        if (item.getItemId() == R.id.item_home) {
+            // 主页
+            changeFragmentIndex(item, 0);
+            return true;
         }
-        return false;
+        ToastUtil.showShort(getApplicationContext(), "功能暂未开放");
+        return true;
     }
 
     /**

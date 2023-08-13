@@ -1,6 +1,9 @@
 package com.hotbitmapgg.bilibili.module.home;
 
+import static com.hotbitmapgg.bilibili.module.home.region.HomeRegionFragment.DRAMA_TYPE_NAME;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -16,6 +19,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.hotbitmapgg.bilibili.adapter.pager.HomePagerAdapter;
 import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.module.common.MainActivity;
+import com.hotbitmapgg.bilibili.module.drama.DramaListActivity;
 import com.hotbitmapgg.bilibili.module.entry.GameCentreActivity;
 import com.hotbitmapgg.bilibili.module.entry.OffLineDownloadActivity;
 import com.hotbitmapgg.bilibili.module.home.index.BottomTabLayoutActivity;
@@ -89,7 +93,13 @@ public class HomePageFragment extends RxLazyFragment {
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                TotalStationSearchActivity.launch(getActivity(), query);
+                Context context = getApplicationContext();
+                Intent intent = new Intent(context, DramaListActivity.class);
+                intent.putExtra(DRAMA_TYPE_NAME, query);
+                //不加会报这个错 Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                //TotalStationSearchActivity.launch(getActivity(), query);
                 return false;
             }
 

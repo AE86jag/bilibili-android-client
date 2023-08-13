@@ -156,7 +156,7 @@ public class MainActivity extends RxBaseActivity implements NavigationView.OnNav
                 // 主页
                 changeFragmentIndex(item, 0);
                 return true;
-            case R.id.item_download:
+            /*case R.id.item_download:
                 // 离线缓存
                 startActivity(new Intent(MainActivity.this, OffLineDownloadActivity.class));
                 return true;
@@ -189,7 +189,7 @@ public class MainActivity extends RxBaseActivity implements NavigationView.OnNav
             case R.id.item_settings:
                 // 设置中心
                 changeFragmentIndex(item, 5);
-                return true;
+                return true;*/
         }
         return false;
     }

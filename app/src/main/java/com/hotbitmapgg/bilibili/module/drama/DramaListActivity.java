@@ -8,12 +8,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bytedance.sdk.dp.DPDrama;
 import com.bytedance.sdk.dp.DPSdk;
 import com.bytedance.sdk.dp.IDPWidgetFactory;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
+import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
+import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
 import com.hotbitmapgg.bilibili.widget.drama.DramaListAdapter;
 import com.hotbitmapgg.ohmybilibili.R;
 
@@ -28,6 +31,9 @@ public class DramaListActivity extends RxBaseActivity {
 
     @BindView(R.id.drama_list)
     RecyclerView mRvMain;
+
+    @BindView(R.id.empty_layout)
+    CustomEmptyView mCustomEmptyView;
 
     @Override
     public int getLayoutId() {
@@ -51,6 +57,10 @@ public class DramaListActivity extends RxBaseActivity {
 
                 @Override
                 public void onSuccess(List<? extends DPDrama> list, Map<String, Object> map) {
+                    if (list == null || list.size() == 0) {
+                        showEmpty();
+                        return;
+                    }
                     DramaListAdapter dramaListAdapter = new DramaListAdapter(getApplicationContext(), list);
                     mRvMain.setAdapter(dramaListAdapter);
                 }
@@ -61,5 +71,13 @@ public class DramaListActivity extends RxBaseActivity {
     @Override
     public void initToolBar() {
 
+    }
+
+    public void showEmpty() {
+        mCustomEmptyView.setVisibility(View.VISIBLE);
+        mRvMain.setVisibility(View.GONE);
+        mCustomEmptyView.setEmptyImage(R.drawable.img_tips_error_load_error);
+        mCustomEmptyView.setEmptyText("查询结果为空，请换关键词重试~(≧▽≦)~");
+        //SnackbarUtil.showMessage(mRvMain, "数据加载失败,请重新加载或者检查网络是否链接");
     }
 }
