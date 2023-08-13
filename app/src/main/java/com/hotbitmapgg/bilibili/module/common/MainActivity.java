@@ -112,13 +112,13 @@ public class MainActivity extends RxBaseActivity implements NavigationView.OnNav
         View headerView = mNavigationView.getHeaderView(0);
         CircleImageView mUserAvatarView = (CircleImageView) headerView.findViewById(R.id.user_avatar_view);
         TextView mUserName = (TextView) headerView.findViewById(R.id.user_name);
-        TextView mUserSign = (TextView) headerView.findViewById(R.id.user_other_info);
+        //TextView mUserSign = (TextView) headerView.findViewById(R.id.user_other_info);
         ImageView mSwitchMode = (ImageView) headerView.findViewById(R.id.iv_head_switch_mode);
         //设置头像
         mUserAvatarView.setImageResource(R.drawable.ic_hotbitmapgg_avatar);
         //设置用户名 签名
         mUserName.setText(getResources().getText(R.string.hotbitmapgg));
-        mUserSign.setText(getResources().getText(R.string.about_user_head_layout));
+        //mUserSign.setText(getResources().getText(R.string.about_user_head_layout));
         //设置日夜间模式切换
         mSwitchMode.setOnClickListener(v -> switchNightMode());
         boolean flag = PreferenceUtil.getBoolean(ConstantUtil.SWITCH_MODE_KEY, false);

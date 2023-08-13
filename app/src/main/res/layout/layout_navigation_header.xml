@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_header_height"
-    android:clickable="true">
+    android:clickable="true"
+    android:fitsSystemWindows="true">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -93,7 +94,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/default_small_text_size" />
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_tiny_margin"
@@ -101,12 +102,12 @@
                     android:text="@string/level_text"
                     android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="10sp" />-->
 
             </LinearLayout>
 
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_tiny_margin"
@@ -114,15 +115,15 @@
                 android:padding="@dimen/default_tiny_margin"
                 android:text="@string/members"
                 android:textColor="@color/nav_head_roung_text_background"
-                android:textSize="10sp" />
+                android:textSize="10sp" />-->
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/user_other_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/default_tiny_margin"
                 android:textColor="@color/white"
-                android:textSize="@dimen/navigation_subtitle_secondary_text_size" />
+                android:textSize="@dimen/navigation_subtitle_secondary_text_size" />-->
 
 
         </LinearLayout>

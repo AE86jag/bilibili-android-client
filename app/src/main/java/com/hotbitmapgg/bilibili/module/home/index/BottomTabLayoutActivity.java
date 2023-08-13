@@ -2,6 +2,7 @@ package com.hotbitmapgg.bilibili.module.home.index;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +45,10 @@ import com.hotbitmapgg.bilibili.module.entry.SettingFragment;
 import com.hotbitmapgg.bilibili.module.entry.VipActivity;
 import com.hotbitmapgg.bilibili.module.home.HomePageFragment;
 import com.hotbitmapgg.bilibili.module.home.attention.HomeAttentionFragment;
+import com.hotbitmapgg.bilibili.utils.ConstantUtil;
+import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
+import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.ohmybilibili.R;
 
 import java.util.List;
@@ -120,7 +126,44 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
         };
 
         initView();
+        initNavigationView();
 
+    }
+
+    private void initNavigationView() {
+        mNavigationView.setNavigationItemSelectedListener(this);
+        View headerView = mNavigationView.getHeaderView(0);
+        CircleImageView mUserAvatarView = (CircleImageView) headerView.findViewById(R.id.user_avatar_view);
+        TextView mUserName = (TextView) headerView.findViewById(R.id.user_name);
+//        TextView mUserSign = (TextView) headerView.findViewById(R.id.user_other_info);
+        ImageView mSwitchMode = (ImageView) headerView.findViewById(R.id.iv_head_switch_mode);
+        //设置头像
+        mUserAvatarView.setImageResource(R.drawable.ic_hotbitmapgg_avatar);
+        //设置用户名 签名
+        mUserName.setText(getResources().getText(R.string.hotbitmapgg));
+        //mUserSign.setText(getResources().getText(R.string.about_user_head_layout));
+        //设置日夜间模式切换
+        mSwitchMode.setOnClickListener(v -> switchNightMode());
+        boolean flag = PreferenceUtil.getBoolean(ConstantUtil.SWITCH_MODE_KEY, false);
+        if (flag) {
+            mSwitchMode.setImageResource(R.drawable.ic_switch_daily);
+        } else {
+            mSwitchMode.setImageResource(R.drawable.ic_switch_night);
+        }
+    }
+
+    private void switchNightMode() {
+        boolean isNight = PreferenceUtil.getBoolean(ConstantUtil.SWITCH_MODE_KEY, false);
+        if (isNight) {
+            // 日间模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            PreferenceUtil.putBoolean(ConstantUtil.SWITCH_MODE_KEY, false);
+        } else {
+            // 夜间模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            PreferenceUtil.putBoolean(ConstantUtil.SWITCH_MODE_KEY, true);
+        }
+        recreate();
     }
 
     /**
