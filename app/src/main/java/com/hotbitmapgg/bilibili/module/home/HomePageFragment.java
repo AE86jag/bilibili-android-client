@@ -141,6 +141,9 @@ public class HomePageFragment extends RxLazyFragment {
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).toggleDrawer();
         }
+        if (activity instanceof BottomTabLayoutActivity) {
+            ((BottomTabLayoutActivity)activity).toggleDrawer();
+        }
     }
 
     @Override

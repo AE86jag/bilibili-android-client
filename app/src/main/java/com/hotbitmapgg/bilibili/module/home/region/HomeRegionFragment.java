@@ -64,13 +64,14 @@ public class HomeRegionFragment extends RxLazyFragment {
 
     @Override
     public void finishCreateView(Bundle state) {
+        Log.i(TAG, "finishCreateView");
         loadData();
-        initRecyclerView();
     }
 
     @Override
     protected void loadData() {
         if (DPSdk.isStartSuccess()) {
+            Log.i(TAG, "start load data");
             DPSdk.factory().requestDramaCategoryList(new IDPWidgetFactory.DramaCategoryCallback() {
                 @Override
                 public void onError(int i, String s) {
@@ -80,8 +81,11 @@ public class HomeRegionFragment extends RxLazyFragment {
 
                 @Override
                 public void onSuccess(List<String> list) {
-                    Log.d(TAG, "request dramas size is:" + list.size());
+                    Log.d(TAG, "get data callback success, request dramas size is:" + list.size());
+                    regionTypes.clear();
                     regionTypes.addAll(list);
+                    //异步回调，在获取成功后初始化adapt
+                    initRecyclerView();
                 }
             });
         }

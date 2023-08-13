@@ -151,6 +151,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
     @Override
     protected void loadData() {
+        Log.i(TAG, "HomeRecommendedFragment loadData: ");
         if (DPSdk.isStartSuccess()) {
             DPSdk.factory().requestAllDrama(pageNum, pageSize, true, new IDPWidgetFactory.DramaCallback() {
                 @Override

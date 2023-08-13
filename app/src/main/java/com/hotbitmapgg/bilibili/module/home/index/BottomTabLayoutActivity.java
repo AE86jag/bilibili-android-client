@@ -1,13 +1,20 @@
 package com.hotbitmapgg.bilibili.module.home.index;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,6 +32,14 @@ import com.bytedance.sdk.dp.IDPDramaListener;
 import com.bytedance.sdk.dp.IDPDrawListener;
 import com.bytedance.sdk.dp.IDPQuizHandler;
 import com.bytedance.sdk.dp.IDPWidget;
+import com.hotbitmapgg.bilibili.module.common.MainActivity;
+import com.hotbitmapgg.bilibili.module.entry.AttentionPeopleFragment;
+import com.hotbitmapgg.bilibili.module.entry.ConsumeHistoryFragment;
+import com.hotbitmapgg.bilibili.module.entry.HistoryFragment;
+import com.hotbitmapgg.bilibili.module.entry.IFavoritesFragment;
+import com.hotbitmapgg.bilibili.module.entry.OffLineDownloadActivity;
+import com.hotbitmapgg.bilibili.module.entry.SettingFragment;
+import com.hotbitmapgg.bilibili.module.entry.VipActivity;
 import com.hotbitmapgg.bilibili.module.home.HomePageFragment;
 import com.hotbitmapgg.bilibili.module.home.attention.HomeAttentionFragment;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
@@ -33,7 +48,9 @@ import com.hotbitmapgg.ohmybilibili.R;
 import java.util.List;
 import java.util.Map;
 
-public class BottomTabLayoutActivity extends AppCompatActivity {
+import butterknife.BindView;
+
+public class BottomTabLayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TabLayout mTabLayout;
     private Fragment[] mFragmensts;
@@ -42,19 +59,22 @@ public class BottomTabLayoutActivity extends AppCompatActivity {
     public static final String TAG = "BottomTabLayoutActivity";
     private static final int FREE_SET = -1;
     private static final int LOCK_SET = -1;
+    private int index;
+    private int currentTabIndex;
+    private DrawerLayout mDrawerLayout;
+
+    private NavigationView mNavigationView;
 
     private static String[] tabNames = new String[]{
-            "推荐", "短剧", "我的"
+            "短剧", "推荐"
     };
 
     private static int[] tabIconsPress = new int[]{
-            R.drawable.ic_category_live, R.drawable.ic_category_t13,
-            R.drawable.ic_category_t1
+            R.drawable.drama_press, R.drawable.recommend_press
     };
 
     private static int[] tabIcons = new int[]{
-            R.drawable.ic_category_t4,
-            R.drawable.ic_category_t36, R.drawable.ic_category_t160
+            R.drawable.drama, R.drawable.recommend
     };
 
     @Override
@@ -85,17 +105,44 @@ public class BottomTabLayoutActivity extends AppCompatActivity {
                         .adListener(drawAdListener) // 混排流内广告监听
                 );
 
+        IFavoritesFragment mFavoritesFragment = IFavoritesFragment.newInstance();
+        HistoryFragment mHistoryFragment = HistoryFragment.newInstance();
+        AttentionPeopleFragment mAttentionPeopleFragment = AttentionPeopleFragment.newInstance();
+        ConsumeHistoryFragment mConsumeHistoryFragment = ConsumeHistoryFragment.newInstance();
+        SettingFragment mSettingFragment = SettingFragment.newInstance();
+
         mFragmensts = new Fragment[] {
-                HomePageFragment.newInstance(), idpWidget.getFragment(), HomeAttentionFragment.newInstance()
+                HomePageFragment.newInstance(), idpWidget.getFragment(), mFavoritesFragment,
+                mHistoryFragment,
+                mAttentionPeopleFragment,
+                mConsumeHistoryFragment,
+                mSettingFragment
         };
 
         initView();
 
     }
 
+    /**
+     * DrawerLayout侧滑菜单开关
+     */
+    public void toggleDrawer() {
+        if (mDrawerLayout == null) {
+            return;
+        }
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+        }
+    }
+
 
     private void initView() {
         mTabLayout = findViewById(R.id.bottom_tab_layout);
+        //TODO 这两个都为null，因为布局文件里面没有
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.navigation_view);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -156,19 +203,11 @@ public class BottomTabLayoutActivity extends AppCompatActivity {
     }
 
     private void onTabItemSelected(int position){
-        Fragment fragment = null;
-        switch (position){
-            case 0:
-                fragment = mFragmensts[0];
-                break;
-            case 1:
-                fragment = mFragmensts[1];
-                break;
-
-            case 2:
-                fragment = mFragmensts[2];
-                break;
+        if (position > mFragmensts.length) {
+            Log.e(TAG, "onTabItemSelected: position is invalid, position is:" + position + "fragment length is:" + mFragmensts.length);
+            return;
         }
+        Fragment fragment = mFragmensts[position];
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment).commit();
         }
@@ -527,4 +566,74 @@ public class BottomTabLayoutActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (mDrawerLayout == null) {
+            return true;
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()) {
+            case R.id.item_home:
+                // 主页
+                changeFragmentIndex(item, 0);
+                return true;
+            case R.id.item_download:
+                // 离线缓存
+                startActivity(new Intent(BottomTabLayoutActivity.this, OffLineDownloadActivity.class));
+                return true;
+            case R.id.item_vip:
+                //大会员
+                startActivity(new Intent(BottomTabLayoutActivity.this, VipActivity.class));
+                return true;
+            case R.id.item_favourite:
+                // 我的收藏
+                changeFragmentIndex(item, 1);
+                return true;
+            case R.id.item_history:
+                // 历史记录
+                changeFragmentIndex(item, 2);
+                return true;
+            case R.id.item_group:
+                // 关注的人
+                changeFragmentIndex(item, 3);
+                return true;
+            case R.id.item_tracker:
+                // 我的钱包
+                changeFragmentIndex(item, 4);
+                return true;
+            case R.id.item_theme:
+                // 主题选择
+                return true;
+            case R.id.item_app:
+                // 应用推荐
+                return true;
+            case R.id.item_settings:
+                // 设置中心
+                changeFragmentIndex(item, 5);
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * 切换Fragment的下标
+     */
+    private void changeFragmentIndex(MenuItem item, int currentIndex) {
+        index = currentIndex;
+        switchFragment();
+        item.setChecked(true);
+    }
+
+    /**
+     * Fragment切换
+     */
+    private void switchFragment() {
+        FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
+        trx.hide(mFragmensts[currentTabIndex]);
+        if (!mFragmensts[index].isAdded()) {
+            trx.add(R.id.container, mFragmensts[index]);
+        }
+        trx.show(mFragmensts[index]).commit();
+        currentTabIndex = index;
+    }
 }
