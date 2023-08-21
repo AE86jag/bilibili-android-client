@@ -204,23 +204,24 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
         }*/
     }
 
+    /*内流短剧详情页的回调通过IDPDramaListener回调，其余沉浸式场景回调通过IDPDrawListener回传给开发者*/
     private IDPDramaListener dramaListener = new IDPDramaListener() {
         @Override
         public void onDPSeekTo(int i, long l) {
+            Log.d(TAG, "用户拖动进度条松手时回调, onDPSeekTo(), position: " + i + ", time: " + l);
             super.onDPSeekTo(i, l);
-            Log.d(TAG, "onDPSeekTo:");
         }
 
         @Override
         public void onDPPageChange(int i, Map<String, Object> map) {
+            Log.d(TAG, "页面切换时回调, onDPPageChange(), 附加参数: " + map + ", 页面索引值: " + i);
             super.onDPPageChange(i, map);
-            Log.d(TAG, "onDPPageChange:" + map);
         }
 
         @Override
         public void onDPVideoPlay(Map<String, Object> map) {
             super.onDPVideoPlay(map);
-            Log.d(TAG, "onDPVideoPlay:" + map);
+            Log.d(TAG, "视频播放时回调, onDPVideoPlay(), 附加参数: " + map);
             if (map != null) {
                 lastIndex = (Integer) map.get("index");
             }
@@ -228,62 +229,58 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
 
         @Override
         public void onDPVideoPause(Map<String, Object> map) {
+            Log.d(TAG, "视频暂停播放时回调（4.3.0.1 添加）, onDPVideoPause(), 附加参数: " + map);
             super.onDPVideoPause(map);
-            Log.d(TAG, "onDPVideoPause:" + map);
         }
 
         @Override
         public void onDPVideoContinue(Map<String, Object> map) {
+            Log.d(TAG, "视频继续播放时回调（4.3.0.1 添加）, onDPVideoContinue(), 附加参数: " + map);
             super.onDPVideoContinue(map);
-            Log.d(TAG, "onDPVideoContinue:" + map);
         }
 
         @Override
         public void onDPVideoCompletion(Map<String, Object> map) {
+            Log.d(TAG, "视频播放完成时回调(包含重复播放), onDPVideoCompletion(), 附加参数: " + map);
             super.onDPVideoCompletion(map);
-            Log.d(TAG, "onDPVideoCompletion:" + map);
         }
 
         @Override
         public void onDPVideoOver(Map<String, Object> map) {
+            Log.d(TAG, "视频播放结束时回调, onDPVideoOver(), 附加参数: " + map);
             super.onDPVideoOver(map);
-            Log.d(TAG, "onDPVideoOver:" + map);
         }
 
         @Override
         public void onDPClose() {
+            Log.d(TAG, "界面关闭时回调, onDPClose()");
             super.onDPClose();
-            Log.d(TAG, "onDPClose");
         }
 
         @Override
         public void onDPRequestStart(@Nullable Map<String, Object> map) {
+            Log.d(TAG, "开始请求回调, onDPRequestStart(), 附加参数: " + map);
             super.onDPRequestStart(map);
-            Log.d(TAG, "onDPRequestStart:" + map);
         }
 
         @Override
         public void onDPRequestFail(int i, String s, @Nullable Map<String, Object> map) {
+            Log.d(TAG, "请求失败回调, onDPRequestFail(), 错误码：" + i + ",错误信息：" + s + ",附加参数: " + map);
             super.onDPRequestFail(i, s, map);
-            Log.d(TAG, "onDPRequestFail:" + map);
         }
 
         @Override
         public void onDPRequestSuccess(List<Map<String, Object>> list) {
+            Log.d(TAG, "请求成功回调, onDPRequestSuccess(), 附加参数: " + list);
             super.onDPRequestSuccess(list);
-            if (list != null && list.size() > 0) {
-                for (Map<String, Object> stringObjectMap : list) {
-                    Log.d(TAG, "onDPRequestSuccess:" + stringObjectMap);
-                }
-            }
         }
 
         @Override
         public boolean isNeedBlock(DPDrama dpDrama, int i, @Nullable Map<String, Object> map) {
+            Log.d(TAG, "短剧视频是否需要阻塞才能进行, isNeedBlock(), 附加参数: " + map);
             if (dpDrama == null) {
                 return false;
             }
-            Log.d(TAG, "isNeedBlock: index = " + i);
             int unlockIndex = mUnlockIndexMap.get(dpDrama.id) == null ? mInitUnlockIndex : mUnlockIndexMap.get(dpDrama.id);
             List<Integer> hasUnlockList = mHasUnlockIndexMap.get(dpDrama.id) == null ? new ArrayList<>() : mHasUnlockIndexMap.get(dpDrama.id);
             return i > unlockIndex && !hasUnlockList.contains(i);
@@ -321,31 +318,32 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
 
         @Override
         public void onDramaSwitch(@Nullable Map<String, Object> map) {
+            Log.d(TAG, "当前播放页短剧切换时回调, onDramaSwitch(), 附加参数: " + map);
             super.onDramaSwitch(map);
-            Log.d(TAG, "onDramaSwitch:" + map);
         }
 
         @Override
         public void onDramaGalleryShow(@Nullable Map<String, Object> map) {
+            Log.d(TAG, "短剧详情页选集面板展现, onDramaGalleryShow(), 附加参数: " + map);
             super.onDramaGalleryShow(map);
         }
 
         @Override
         public void onDramaGalleryClick(@Nullable Map<String, Object> map) {
+            Log.d(TAG, "短剧详情页选集面板点击, onDramaGalleryClick(), 附加参数: " + map);
             super.onDramaGalleryClick(map);
-            Log.d(TAG, "onDramaGalleryClick: " + map);
         }
 
         @Override
         public void onRewardDialogShow(@Nullable Map<String, Object> map) {
+            Log.d(TAG, "短剧解锁弹窗展示, onRewardDialogShow(), 附加参数: " + map);
             super.onRewardDialogShow(map);
-            Log.d(TAG, "onRewardDialogShow: $it" + map);
         }
 
         @Override
         public void onUnlockDialogAction(String s, @Nullable Map<String, Object> map) {
+            Log.d(TAG, "短剧解锁弹窗点击动作, onUnlockDialogAction(), 点击动作：" + s + "附加参数: " + map);
             super.onUnlockDialogAction(s, map);
-            Log.d(TAG, "onUnlockDialogAction: s: " + s + "map: " + map);
         }
 
         @Override
@@ -357,74 +355,74 @@ public class MyDramaApiDetailActivity extends AppCompatActivity {
     private IDPAdListener dramaAdListener = new IDPAdListener() {
         @Override
         public void onDPAdRequest(Map<String, Object> map) {
+            Log.d(TAG, "广告请求, onDPAdRequest: 附加参数:" + map);
             super.onDPAdRequest(map);
-            Log.d(TAG, "onDPAdRequest map = " + map);
         }
 
         @Override
         public void onDPAdRequestSuccess(Map<String, Object> map) {
+            Log.d(TAG, "广告请求成功, onDPAdRequestSuccess: 附加参数:" + map);
             super.onDPAdRequestSuccess(map);
-            Log.d(TAG, "onDPAdRequestSuccess map = " + map);
         }
 
         @Override
         public void onDPAdRequestFail(int i, String s, Map<String, Object> map) {
+            Log.d(TAG, "广告请求失败, onDPAdRequestFail: 错误码:" + i + ",错误信息:" + s + " 附加参数:" + map);
             super.onDPAdRequestFail(i, s, map);
-            Log.d(TAG, "onDPAdRequestFail map = " + map);
         }
 
         @Override
         public void onDPAdFillFail(Map<String, Object> map) {
+            Log.d(TAG, "广告填充失败, onDPAdFillFail: 附加参数:" + map);
             super.onDPAdFillFail(map);
-            Log.d(TAG, "onDPAdFillFail map = " + map);
         }
 
         @Override
         public void onDPAdShow(Map<String, Object> map) {
+            Log.d(TAG, "广告曝光, onDPAdShow: 附加参数:" + map);
             super.onDPAdShow(map);
-            Log.d(TAG, "onDPAdShow map = " + map);
         }
 
         @Override
         public void onDPAdPlayStart(Map<String, Object> map) {
+            Log.d(TAG, "广告开始播放, onDPAdPlayStart: 附加参数:" + map);
             super.onDPAdPlayStart(map);
-            Log.d(TAG, "onDPAdPlayStart map = " + map);
         }
 
         @Override
         public void onDPAdPlayPause(Map<String, Object> map) {
+            Log.d(TAG, "广告暂停播放, onDPAdPlayPause: 附加参数:" + map);
             super.onDPAdPlayPause(map);
-            Log.d(TAG, "onDPAdPlayPause map = " + map);
         }
 
         @Override
         public void onDPAdPlayContinue(Map<String, Object> map) {
+            Log.d(TAG, "广告继续播放, onDPAdPlayContinue: 附加参数:" + map);
             super.onDPAdPlayContinue(map);
-            Log.d(TAG, "onDPAdPlayContinue map = " + map);
         }
 
         @Override
         public void onDPAdPlayComplete(Map<String, Object> map) {
+            Log.d(TAG, "广告播放结束, onDPAdPlayComplete: 附加参数:" + map);
             super.onDPAdPlayComplete(map);
-            Log.d(TAG, "onDPAdPlayComplete map = " + map);
         }
 
         @Override
         public void onDPAdClicked(Map<String, Object> map) {
+            Log.d(TAG, "广告点击, onDPAdClicked: 附加参数:" + map);
             super.onDPAdClicked(map);
-            Log.d(TAG, "onDPAdClicked map = " + map);
         }
 
         @Override
         public void onRewardVerify(Map<String, Object> map) {
+            Log.d(TAG, "激励视频广告确认回调, onRewardVerify: 附加参数:" + map);
             super.onRewardVerify(map);
-            Log.d(TAG, "onRewardVerify map = " + map);
         }
 
         @Override
         public void onSkippedVideo(Map<String, Object> map) {
+            Log.d(TAG, "激励视频广告跳过回调, onSkippedVideo: 附加参数:" + map);
             super.onSkippedVideo(map);
-            Log.d(TAG, "onSkippedVideo map = " + map);
         }
     };
 

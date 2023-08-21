@@ -33,6 +33,7 @@ import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import rx.android.schedulers.AndroidSchedulers;
@@ -162,6 +163,11 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
                 @Override
                 public void onSuccess(List<? extends DPDrama> list, Map<String, Object> map) {
+                    List<Long> ids = new ArrayList<>();
+                    for (DPDrama drama : list) {
+                        ids.add(drama.id);
+                    }
+                    Log.i(TAG, "onSuccess: " + ids);
                     Log.d(TAG, "request success, drama size = " + (list == null ? 0 : list.size()));
                     if (list != null && list.size() > 0) {
                         results.addAll(list);
