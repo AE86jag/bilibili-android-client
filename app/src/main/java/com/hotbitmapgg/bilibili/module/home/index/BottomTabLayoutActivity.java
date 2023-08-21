@@ -1,15 +1,19 @@
 package com.hotbitmapgg.bilibili.module.home.index;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -35,27 +39,16 @@ import com.bytedance.sdk.dp.IDPDramaListener;
 import com.bytedance.sdk.dp.IDPDrawListener;
 import com.bytedance.sdk.dp.IDPQuizHandler;
 import com.bytedance.sdk.dp.IDPWidget;
-import com.hotbitmapgg.bilibili.module.common.MainActivity;
-import com.hotbitmapgg.bilibili.module.entry.AttentionPeopleFragment;
-import com.hotbitmapgg.bilibili.module.entry.ConsumeHistoryFragment;
-import com.hotbitmapgg.bilibili.module.entry.HistoryFragment;
-import com.hotbitmapgg.bilibili.module.entry.IFavoritesFragment;
-import com.hotbitmapgg.bilibili.module.entry.OffLineDownloadActivity;
-import com.hotbitmapgg.bilibili.module.entry.SettingFragment;
-import com.hotbitmapgg.bilibili.module.entry.VipActivity;
 import com.hotbitmapgg.bilibili.module.home.HomePageFragment;
-import com.hotbitmapgg.bilibili.module.home.attention.HomeAttentionFragment;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
-import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 import com.hotbitmapgg.bilibili.utils.ToastUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.ohmybilibili.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import butterknife.BindView;
 
 public class BottomTabLayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -68,6 +61,17 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
     private static final int LOCK_SET = -1;
     private int index;
     private int currentTabIndex;
+
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE
+    };
+
+    private final List<String> mPermissionList = new ArrayList<>();
+
     private DrawerLayout mDrawerLayout;
 
     private NavigationView mNavigationView;
@@ -126,7 +130,7 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
 
         initView();
         initNavigationView();
-
+        getPermissions();
     }
 
     private void initNavigationView() {
@@ -988,5 +992,19 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
         }
         trx.show(mFragmensts[index]).commit();
         currentTabIndex = index;
+    }
+
+    private void getPermissions() {
+        mPermissionList.clear(); //清空已经允许的没有通过的权限
+        for (int i = 0; i < PERMISSIONS.length; i++) {
+            if (ContextCompat.checkSelfPermission(this, PERMISSIONS[i])
+                    != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(PERMISSIONS[i]);
+            }
+        }
+        if (mPermissionList.size() > 0) {                           //有权限没有通过，需要申请
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 10000);
+        } else {
+        }
     }
 }

@@ -62,7 +62,7 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
     private SectionedRecyclerViewAdapter mSectionedAdapter;
     //private List<BannerEntity> banners = new ArrayList<>();
-    private List<DPDrama> results = new ArrayList<>();
+    private List<? extends DPDrama> results = new ArrayList<>();
     //private List<RecommendBannerInfo.DataBean> recommendBanners = new ArrayList<>();
 
     private static final String TAG = "HomeRecommendedFragment";
@@ -152,8 +152,8 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
     @Override
     protected void loadData() {
-        Log.i(TAG, "HomeRecommendedFragment loadData: ");
         if (DPSdk.isStartSuccess()) {
+            Log.d(TAG, "HomeRecommendedFragment loadData: pageNum:" + pageNum + ", pageSize:" + pageSize);
             DPSdk.factory().requestAllDrama(pageNum, pageSize, true, new IDPWidgetFactory.DramaCallback() {
                 @Override
                 public void onError(int i, String s) {
@@ -163,14 +163,9 @@ public class HomeRecommendedFragment extends RxLazyFragment {
 
                 @Override
                 public void onSuccess(List<? extends DPDrama> list, Map<String, Object> map) {
-                    List<Long> ids = new ArrayList<>();
-                    for (DPDrama drama : list) {
-                        ids.add(drama.id);
-                    }
-                    Log.i(TAG, "onSuccess: " + ids);
                     Log.d(TAG, "request success, drama size = " + (list == null ? 0 : list.size()));
                     if (list != null && list.size() > 0) {
-                        results.addAll(list);
+                        results = list;
                     }
                     finishTask();
                 }

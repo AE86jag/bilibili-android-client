@@ -63,7 +63,7 @@ public class HomeRecommendedSection extends StatelessSection {
     private static final String TYPE_BANGUMI = "bangumi_2";
     private static final String GOTO_BANGUMI = "bangumi_list";
     private static final String TYPE_ACTIVITY = "activity";
-    private List<DPDrama> datas = new ArrayList<>();
+    private List<? extends DPDrama> datas = new ArrayList<>();
     private final Random mRandom;
     private int[] icons = new int[]{
             R.drawable.ic_header_hot, R.drawable.ic_head_live,
@@ -85,7 +85,7 @@ public class HomeRecommendedSection extends StatelessSection {
     public static final String KEY_DRAMA_CUSTOM_REPORT_ENABLED = "key_drama_custom_report_enabled";
     public static final String KEY_DRAMA_HIDE_LEFT_TOP_TIPS = "key_drama_hide_left_top_tips";
 
-    public HomeRecommendedSection(Context context, String title, String type, int liveCount, List<DPDrama> datas) {
+    public HomeRecommendedSection(Context context, String title, String type, int liveCount, List<? extends DPDrama> datas) {
         //super(R.layout.layout_home_recommend_head, R.layout.layout_home_recommend_foot, R.layout.layout_home_recommend_boby);
         super(R.layout.layout_home_recommend_boby);
         this.mContext = context;
