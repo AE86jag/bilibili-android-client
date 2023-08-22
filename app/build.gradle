@@ -112,11 +112,11 @@ dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6'
 }
 
 repositories {
