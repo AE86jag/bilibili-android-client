@@ -45,13 +45,16 @@ public class SplashActivity extends RxActivity {
 
 
     private void finishTask() {
+        startActivity(new Intent(SplashActivity.this, BottomTabLayoutActivity.class));
+        /*
         boolean isLogin = PreferenceUtil.getBoolean(ConstantUtil.KEY, false);
         if (isLogin) {
             startActivity(new Intent(SplashActivity.this, BottomTabLayoutActivity.class));
         } else {
+            //TODO 从登录页跳转到首页不会有底部TAB
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         }
-        SplashActivity.this.finish();
+        SplashActivity.this.finish();*/
     }
 
 
