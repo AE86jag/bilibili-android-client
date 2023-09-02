@@ -13,7 +13,7 @@ import com.hotbitmapgg.bilibili.adapter.helper.AbsRecyclerViewAdapter;
 import com.hotbitmapgg.bilibili.entity.search.SearchUpperInfo;
 import com.hotbitmapgg.bilibili.utils.NumberUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.List;
 

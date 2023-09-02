@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.SystemBarHelper;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import butterknife.BindView;
 

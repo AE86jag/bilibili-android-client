@@ -24,7 +24,7 @@ import com.hotbitmapgg.bilibili.module.home.discover.ActivityCenterActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
 import com.hotbitmapgg.bilibili.widget.sectioned.SectionedRecyclerViewAdapter;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendActivityCenterSection;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendPicSection;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;

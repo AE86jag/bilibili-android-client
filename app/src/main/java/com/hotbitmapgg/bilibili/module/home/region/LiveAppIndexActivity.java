@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.hotbitmapgg.bilibili.adapter.LiveAppIndexAdapter;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 
 import butterknife.BindView;

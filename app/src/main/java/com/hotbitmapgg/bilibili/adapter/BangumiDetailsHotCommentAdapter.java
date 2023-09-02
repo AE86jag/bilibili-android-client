@@ -14,7 +14,7 @@ import com.hotbitmapgg.bilibili.adapter.helper.AbsRecyclerViewAdapter;
 import com.hotbitmapgg.bilibili.entity.bangumi.BangumiDetailsCommentInfo;
 import com.hotbitmapgg.bilibili.utils.DateUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.List;
 

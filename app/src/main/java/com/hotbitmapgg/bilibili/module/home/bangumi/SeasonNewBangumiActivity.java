@@ -11,7 +11,7 @@ import android.view.View;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.widget.CircleProgressView;
 import com.hotbitmapgg.bilibili.widget.sectioned.SectionedRecyclerViewAdapter;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.adapter.section.SeasonNewBangumiSection;
 import com.hotbitmapgg.bilibili.entity.bangumi.SeasonNewBangumiInfo;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;

@@ -1,4 +1,4 @@
-package com.hotbitmapgg.ohmybilibili;
+package com.spmystery.drama;
 
 import org.junit.Test;
 

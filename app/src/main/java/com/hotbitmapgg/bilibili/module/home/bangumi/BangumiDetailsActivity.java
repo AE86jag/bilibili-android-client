@@ -37,7 +37,7 @@ import com.hotbitmapgg.bilibili.utils.LogUtil;
 import com.hotbitmapgg.bilibili.utils.NumberUtil;
 import com.hotbitmapgg.bilibili.utils.SystemBarHelper;
 import com.hotbitmapgg.bilibili.widget.CircleProgressView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;

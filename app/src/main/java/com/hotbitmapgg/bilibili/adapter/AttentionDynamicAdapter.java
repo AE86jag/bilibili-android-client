@@ -15,7 +15,7 @@ import com.hotbitmapgg.bilibili.entity.attention.AttentionDynamicInfo;
 import com.hotbitmapgg.bilibili.utils.NumberUtil;
 import com.hotbitmapgg.bilibili.utils.WeekDayUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.List;
 

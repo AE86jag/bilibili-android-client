@@ -17,7 +17,7 @@ import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.entity.discover.ActivityCenterInfo;
 import com.hotbitmapgg.bilibili.module.common.BrowserActivity;
 import com.hotbitmapgg.bilibili.utils.ToastUtil;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 
 import java.util.ArrayList;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.hotbitmapgg.bilibili.entity.discover.HotSearchTag;
 import com.hotbitmapgg.bilibili.module.entry.GameCentreActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.module.common.BrowserActivity;
 import com.hotbitmapgg.bilibili.module.search.TotalStationSearchActivity;

@@ -20,7 +20,7 @@ import com.hotbitmapgg.bilibili.media.callback.VideoBackListener;
 import com.hotbitmapgg.bilibili.media.danmuku.BiliDanmukuDownloadUtil;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.HashMap;
 

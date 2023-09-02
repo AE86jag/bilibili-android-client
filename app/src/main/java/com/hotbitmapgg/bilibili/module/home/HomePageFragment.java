@@ -25,7 +25,7 @@ import com.hotbitmapgg.bilibili.module.entry.OffLineDownloadActivity;
 import com.hotbitmapgg.bilibili.module.home.index.BottomTabLayoutActivity;
 import com.hotbitmapgg.bilibili.module.search.TotalStationSearchActivity;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;

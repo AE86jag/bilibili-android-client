@@ -14,7 +14,7 @@ import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.DateUtil;
 import com.hotbitmapgg.bilibili.utils.WeekDayUtil;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.List;
 

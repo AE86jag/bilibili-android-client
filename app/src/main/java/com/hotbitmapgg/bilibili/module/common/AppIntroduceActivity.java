@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.utils.ShareUtil;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import butterknife.BindView;
 import butterknife.OnClick;

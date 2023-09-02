@@ -30,7 +30,7 @@ import com.bytedance.sdk.dp.DPWidgetDramaDetailParams;
 import com.bytedance.sdk.dp.IDPWidgetFactory;
 import com.hotbitmapgg.bilibili.adapter.section.HomeRecommendedSection;
 import com.hotbitmapgg.bilibili.module.drama.MyDramaApiDetailActivity;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.ArrayList;
 import java.util.List;

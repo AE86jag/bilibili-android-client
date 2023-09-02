@@ -18,7 +18,7 @@ import com.hotbitmapgg.bilibili.entity.region.RegionTypesInfo;
 import com.hotbitmapgg.bilibili.rx.RxBus;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.widget.NoScrollViewPager;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.ArrayList;
 import java.util.List;

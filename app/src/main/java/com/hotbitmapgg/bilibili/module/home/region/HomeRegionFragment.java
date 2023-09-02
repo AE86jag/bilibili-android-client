@@ -20,7 +20,7 @@ import com.hotbitmapgg.bilibili.module.drama.DramaListActivity;
 import com.hotbitmapgg.bilibili.module.drama.MyDramaApiDetailActivity;
 import com.hotbitmapgg.bilibili.module.entry.GameCentreActivity;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;

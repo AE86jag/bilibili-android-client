@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 /**
  * Created by hcc on 16/8/7 21:18

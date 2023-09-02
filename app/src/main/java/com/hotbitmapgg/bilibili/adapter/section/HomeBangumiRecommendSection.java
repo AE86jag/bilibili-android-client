@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.hotbitmapgg.bilibili.adapter.HomeBangumiRecommendAdapter;
 import com.hotbitmapgg.bilibili.entity.bangumi.BangumiRecommendInfo;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.module.common.BrowserActivity;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
 

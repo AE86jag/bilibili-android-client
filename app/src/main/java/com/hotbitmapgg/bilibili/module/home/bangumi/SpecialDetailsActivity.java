@@ -24,7 +24,7 @@ import com.hotbitmapgg.bilibili.entity.bangumi.SpecialTopicIResult;
 import com.hotbitmapgg.bilibili.module.video.VideoDetailsActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.widget.CircleProgressView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 
 import java.util.ArrayList;

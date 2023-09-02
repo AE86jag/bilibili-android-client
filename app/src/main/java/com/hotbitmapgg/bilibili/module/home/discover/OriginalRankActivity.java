@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.widget.NoScrollViewPager;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import butterknife.BindView;
 

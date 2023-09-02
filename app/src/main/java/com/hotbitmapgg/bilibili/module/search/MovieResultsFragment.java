@@ -16,7 +16,7 @@ import com.hotbitmapgg.bilibili.entity.search.SearchMovieInfo;
 import com.hotbitmapgg.bilibili.module.home.bangumi.SpecialDetailsActivity;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.ArrayList;
 import java.util.List;

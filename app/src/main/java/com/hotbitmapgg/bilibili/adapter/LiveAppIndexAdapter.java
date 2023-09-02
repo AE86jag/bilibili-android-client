@@ -21,7 +21,7 @@ import com.hotbitmapgg.bilibili.module.home.live.LivePlayerActivity;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.bilibili.widget.banner.BannerEntity;
 import com.hotbitmapgg.bilibili.widget.banner.BannerView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.ArrayList;
 import java.util.List;

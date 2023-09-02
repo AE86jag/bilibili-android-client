@@ -12,7 +12,7 @@ import com.hotbitmapgg.bilibili.utils.CommonUtil;
 import com.hotbitmapgg.bilibili.utils.ToastUtil;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
 import com.hotbitmapgg.bilibili.widget.progressbar.NumberProgressBar;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import butterknife.BindView;
 

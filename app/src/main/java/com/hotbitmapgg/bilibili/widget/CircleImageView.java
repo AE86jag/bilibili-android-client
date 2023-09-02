@@ -20,7 +20,7 @@ import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 /**
  * Created by hcc on 16/8/7 21:18

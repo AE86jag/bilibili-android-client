@@ -15,7 +15,7 @@ import com.hotbitmapgg.bilibili.entity.video.VideoCommentInfo;
 import com.hotbitmapgg.bilibili.network.auxiliary.UrlHelper;
 import com.hotbitmapgg.bilibili.utils.DateUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.List;
 

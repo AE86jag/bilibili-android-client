@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hotbitmapgg.bilibili.module.user.UserInfoDetailsActivity;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 /**
  * Created by hcc on 16/8/7 21:18

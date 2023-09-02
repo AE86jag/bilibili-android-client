@@ -12,7 +12,7 @@ import com.hotbitmapgg.bilibili.module.home.drama.DramaTypeListFragment;
 import com.hotbitmapgg.bilibili.module.home.live.HomeLiveFragment;
 import com.hotbitmapgg.bilibili.module.home.recommend.HomeRecommendedFragment;
 import com.hotbitmapgg.bilibili.module.home.region.HomeRegionFragment;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 /**
  * Created by hcc on 16/8/4 14:12

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiIndexActivity;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiScheduleActivity;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

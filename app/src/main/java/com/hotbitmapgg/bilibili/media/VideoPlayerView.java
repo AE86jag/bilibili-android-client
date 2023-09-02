@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 import com.hotbitmapgg.bilibili.media.callback.MediaPlayerListener;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.io.IOException;
 

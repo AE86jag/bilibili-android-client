@@ -11,7 +11,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 /**
  * Created by hcc on 16/8/7 21:18

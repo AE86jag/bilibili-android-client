@@ -8,7 +8,7 @@ import android.view.View;
 import com.hotbitmapgg.bilibili.adapter.ActivityCenterRecyclerAdapter;
 import com.hotbitmapgg.bilibili.entity.recommend.RecommendInfo;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
-import com.hotbitmapgg.ohmybilibili.R;
+import com.spmystery.drama.R;
 
 import java.util.List;
 
