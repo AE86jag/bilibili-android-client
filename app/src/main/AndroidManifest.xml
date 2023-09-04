@@ -9,7 +9,8 @@
         android:largeScreens="true"
         android:normalScreens="false"
         android:resizeable="true"
-        android:smallScreens="true" />
+        android:smallScreens="true"
+        tools:replace="android:normalScreens"/>
 
     <!-- 用户权限设置 -->
     <uses-permission android:name="android.permission.INTERNET" />

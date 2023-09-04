@@ -1,7 +1,5 @@
 package com.hotbitmapgg.bilibili;
 
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -26,7 +24,17 @@ import com.bytedance.sdk.openadsdk.TTCustomController;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
+
+import io.dcloud.common.adapter.util.Logger;
+import io.dcloud.common.util.RuningAcitvityUtil;
+import io.dcloud.feature.sdk.DCSDKInitConfig;
+import io.dcloud.feature.sdk.DCUniMPSDK;
+import io.dcloud.feature.sdk.Interface.IDCUniMPPreInitCallback;
+import io.dcloud.feature.sdk.Interface.IMenuButtonClickCallBack;
+import io.dcloud.feature.sdk.MenuActionSheetItem;
 
 /**
  * Created by hcc on 16/8/7 21:18
@@ -37,6 +45,8 @@ import java.util.function.Function;
 public class BilibiliApp extends Application {
 
     public static BilibiliApp mInstance;
+
+    public static final String TAG = "BilibiliApp";
 
     private Handler mainHandler = new Handler(Looper.getMainLooper());
 
@@ -62,6 +72,54 @@ public class BilibiliApp extends Application {
 
         boolean isMainProcess = getApplicationContext().getPackageName().equals(getCurrentProcessName());
         initADSDK(this, "5413164", isMainProcess);
+
+        /*// 非小程序进程（这里的unimp 关键字 可以根据宿主的具体情况进行调整）
+        if(!RuningAcitvityUtil.getAppName(getBaseContext()).contains("unimp")) {
+            //请在此处初始化其他三方SDK
+        }*/
+
+        initDCloudPm();
+    }
+
+    private void initDCloudPm() {
+        MenuActionSheetItem item = new MenuActionSheetItem("关于", "gy");
+
+        MenuActionSheetItem item1 = new MenuActionSheetItem("获取当前页面url", "hqdqym");
+        MenuActionSheetItem item2 = new MenuActionSheetItem("跳转到宿主原生测试页面", "gotoTestPage");
+        List<MenuActionSheetItem> sheetItems = new ArrayList<>();
+        sheetItems.add(item);
+        sheetItems.add(item1);
+        sheetItems.add(item2);
+        Log.i("unimp","onCreate----");
+        DCSDKInitConfig config = new DCSDKInitConfig.Builder()
+                .setCapsule(false)
+                .setMenuDefFontSize("16px")
+                .setMenuDefFontColor("#ff00ff")
+                .setMenuDefFontWeight("normal")
+                .setMenuActionSheetItems(sheetItems)
+                .setEnableBackground(true)//开启后台运行
+                .setUniMPFromRecents(false)
+                .build();
+        DCUniMPSDK instance = DCUniMPSDK.getInstance();
+        //设置setDefMenuButtonClickCallBack监听默认菜单按钮点击事件。
+        //uni小程序运行在独立进程中。所以小程序中的内存与宿主是不会共享的。在点击事件处理上请注意！！！
+        instance.setDefMenuButtonClickCallBack(new IMenuButtonClickCallBack() {
+                    @Override
+                    public void onClick(String appid, String id) {
+                        switch (id) {
+                            case "gy":{
+                                Logger.e(appid+"用户点击了关于");
+                            }
+                        }
+                    }
+                });
+        instance.initialize(this, config, new IDCUniMPPreInitCallback() {
+            @Override
+            public void onInitFinished(boolean b) {
+                Log.d("unimpaa","onInitFinished----"+b);
+            }
+        });
+        //初始化 uni小程序SDK ----end----------
     }
 
 

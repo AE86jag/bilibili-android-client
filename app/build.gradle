@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+def mfph = [
+        //包名
+        "apk.applicationId" : "com.spmystery.drama",
+]
+
 Properties props = new Properties()
 props.load(new FileInputStream(file("configuration.properties")))
 
@@ -13,11 +18,16 @@ android {
         targetSdkVersion 28
         versionCode props["versionCode"] as int
         versionName props['versionName']
+        ndk {
+            abiFilters 'x86','armeabi-v7a',"arm64-v8a" //不支持armeabi
+        }
 
     }
-    /*ndk{
-        abiFilters armeabi-v7a, arm64-v8a,x86,x86_64
-    }*/
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        //noCompress 'foo', 'bar'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
 
     buildTypes {
         release {
@@ -60,6 +70,9 @@ configurations.all {
 }
 
 repositories {
+    flatDir {
+        dirs 'libs'
+    }
     jcenter()
     google()
     maven { url "https://jitpack.io" }
@@ -68,6 +81,7 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
@@ -97,6 +111,12 @@ dependencies {
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'com.jakewharton:butterknife:8.4.0'
+
+    implementation 'com.alibaba:fastjson:1.2.83' //必须集成，fastjson功能需要
+    implementation 'com.facebook.fresco:fresco:2.5.0'//必须集成，图片加载需要
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'//必须集成，图片加载需要
+    implementation 'com.github.bumptech.glide:glide:4.9.0'//必须集成，图片加载需要
+    implementation 'com.android.support:webkit:28.0.0' //3.6.15版本之后 必须集成，用来支持暗黑模式
     //implementation 'com.bytedance.applog:RangersAppLog-All-cn:6.15.4'
 
     implementation 'com.pangle.cn:ads-sdk-pro:5.4.1.6'

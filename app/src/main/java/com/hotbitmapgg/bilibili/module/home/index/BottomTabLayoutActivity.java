@@ -40,6 +40,7 @@ import com.bytedance.sdk.dp.IDPDrawListener;
 import com.bytedance.sdk.dp.IDPQuizHandler;
 import com.bytedance.sdk.dp.IDPWidget;
 import com.hotbitmapgg.bilibili.module.home.HomePageFragment;
+import com.hotbitmapgg.bilibili.unimp.MySplashView;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
 import com.hotbitmapgg.bilibili.utils.ToastUtil;
@@ -49,6 +50,10 @@ import com.spmystery.drama.R;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import io.dcloud.feature.sdk.DCUniMPSDK;
+import io.dcloud.feature.sdk.Interface.IUniMP;
+import io.dcloud.feature.unimp.config.UniMPOpenConfiguration;
 
 public class BottomTabLayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -966,6 +971,20 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
         if (item.getItemId() == R.id.item_home) {
             // 主页
             changeFragmentIndex(item, 0);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.item_download) {
+            try {
+                UniMPOpenConfiguration uniMPOpenConfiguration = new UniMPOpenConfiguration();
+                uniMPOpenConfiguration.splashClass = MySplashView.class;
+                uniMPOpenConfiguration.extraData.put("darkmode", "light");
+                IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(this,"__UNI__B104B28", uniMPOpenConfiguration);
+                // TODO 先不做缓存
+                // mUniMPCaches.put(uniMP.getAppid(), uniMP);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
         ToastUtil.showShort(getApplicationContext(), "功能暂未开放");
