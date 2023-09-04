@@ -168,7 +168,7 @@ public class BangumiDetailsActivity extends RxBaseActivity {
         //设置背景高斯模糊图片
         Glide.with(this)
                 .load(result.getCover())
-                .bitmapTransform(new BlurTransformation(this))
+                //.bitmapTransform(new BlurTransformation(this))
                 .into(mBangumiBackgroundImage);
         //设置番剧标题
         mBangumiTitle.setText(result.getTitle());

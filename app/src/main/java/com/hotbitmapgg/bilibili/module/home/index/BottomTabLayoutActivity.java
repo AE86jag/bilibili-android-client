@@ -979,11 +979,17 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
                 UniMPOpenConfiguration uniMPOpenConfiguration = new UniMPOpenConfiguration();
                 uniMPOpenConfiguration.splashClass = MySplashView.class;
                 uniMPOpenConfiguration.extraData.put("darkmode", "light");
-                IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(this,"__UNI__B104B28", uniMPOpenConfiguration);
+                DCUniMPSDK instance = DCUniMPSDK.getInstance();
+                System.out.println("是否初始化：" + instance.isInitialize());
+                IUniMP uniMP = instance.openUniMP(this,"__UNI__B104B28", uniMPOpenConfiguration);
+                System.out.println(uniMP.getAppid());
+                System.out.println(uniMP.getCurrentPageUrl());
+                System.out.println(uniMP.isRunning());
+                System.out.println(uniMP.isRuning());
                 // TODO 先不做缓存
                 // mUniMPCaches.put(uniMP.getAppid(), uniMP);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e(TAG, "onNavigationItemSelected: open UniMP error", e);
             }
             return true;
         }
