@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import butterknife.BindView;
 

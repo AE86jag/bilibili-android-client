@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def mfph = [
         //包名
-        "apk.applicationId" : "com.spmystery.drama",
+        "apk.applicationId" : "com.spmystery.episode",
 ]
 
 Properties props = new Properties()
@@ -13,14 +13,16 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "com.spmystery.drama"
+        applicationId "com.spmystery.episode"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode props["versionCode"] as int
         versionName props['versionName']
+        multiDexEnabled true
         ndk {
             abiFilters 'x86','armeabi-v7a',"arm64-v8a" //不支持armeabi
         }
+        manifestPlaceholders = mfph
 
     }
     aaptOptions {
@@ -35,7 +37,7 @@ android {
             shrinkResources false
             buildConfigField("boolean", "LOG_DEBUG", "false")
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard.cfg'
         }
         debug {
             zipAlignEnabled true
@@ -44,7 +46,7 @@ android {
             debuggable true
             jniDebuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard.cfg'
         }
     }
 

@@ -15,7 +15,7 @@ import com.hotbitmapgg.bilibili.module.video.VideoDetailsActivity;
 import com.hotbitmapgg.bilibili.rx.RxBus;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.module.common.MainActivity;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import butterknife.BindView;
 

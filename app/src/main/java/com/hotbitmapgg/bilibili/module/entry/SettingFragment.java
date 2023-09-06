@@ -17,7 +17,7 @@ import com.hotbitmapgg.bilibili.module.common.LoginActivity;
 import com.hotbitmapgg.bilibili.module.common.MainActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import butterknife.BindView;
 import butterknife.OnClick;

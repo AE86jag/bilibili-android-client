@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hotbitmapgg.bilibili.adapter.helper.AbsRecyclerViewAdapter;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 /**
  * Created by hcc on 2016/10/21 21:55

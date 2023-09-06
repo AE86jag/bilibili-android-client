@@ -14,7 +14,7 @@ import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.entity.video.VideoCommentInfo;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import com.hotbitmapgg.bilibili.module.home.index.BottomTabLayoutActivity;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
 import com.hotbitmapgg.bilibili.utils.SystemUiVisibilityUtil;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.trello.rxlifecycle.components.RxActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -53,8 +53,8 @@ public class SplashActivity extends RxActivity {
         } else {
             //TODO 从登录页跳转到首页不会有底部TAB
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-        }
-        SplashActivity.this.finish();*/
+        }*/
+        SplashActivity.this.finish();
     }
 
 

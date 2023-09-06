@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hotbitmapgg.bilibili.adapter.helper.AbsRecyclerViewAdapter;
 import com.hotbitmapgg.bilibili.entity.user.UserInterestQuanInfo;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 

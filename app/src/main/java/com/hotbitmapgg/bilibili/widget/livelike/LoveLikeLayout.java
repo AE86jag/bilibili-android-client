@@ -18,7 +18,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.Random;
 

@@ -23,7 +23,7 @@ import com.hotbitmapgg.bilibili.entity.user.UserInterestQuanInfo;
 import com.hotbitmapgg.bilibili.entity.user.UserLiveRoomStatusInfo;
 import com.hotbitmapgg.bilibili.entity.user.UserPlayGameInfo;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 

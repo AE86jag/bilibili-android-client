@@ -31,7 +31,7 @@ import com.bytedance.sdk.dp.DPSdk;
 import com.bytedance.sdk.dp.DPWidgetDramaDetailParams;
 import com.bytedance.sdk.dp.IDPWidgetFactory;
 import com.hotbitmapgg.bilibili.module.drama.MyDramaApiDetailActivity;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiIndexActivity;
 import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiScheduleActivity;
 import com.hotbitmapgg.bilibili.module.home.discover.OriginalRankActivity;

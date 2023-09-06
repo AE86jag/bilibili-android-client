@@ -38,7 +38,7 @@ import com.hotbitmapgg.bilibili.utils.ToastUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.bilibili.widget.CircleProgressView;
 import com.hotbitmapgg.bilibili.widget.NoScrollViewPager;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.ArrayList;
 import java.util.List;

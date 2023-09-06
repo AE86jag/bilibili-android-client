@@ -69,7 +69,6 @@ public class BilibiliApp extends Application {
         mInstance = this;
         init();
 
-
         // 非小程序进程（这里的unimp 关键字 可以根据宿主的具体情况进行调整）
         if(!RuningAcitvityUtil.getAppName(getBaseContext()).contains("unimp")) {
             //请在此处初始化其他三方SDK
@@ -79,7 +78,7 @@ public class BilibiliApp extends Application {
             initADSDK(this, "5413164", isMainProcess);
         }
 
-        initDCloudPm();
+        //initDCloudPm();
     }
 
     private void initDCloudPm() {

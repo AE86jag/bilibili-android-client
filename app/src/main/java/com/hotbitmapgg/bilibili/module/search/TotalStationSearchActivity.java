@@ -25,7 +25,7 @@ import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.KeyBoardUtil;
 import com.hotbitmapgg.bilibili.utils.StatusBarUtil;
 import com.hotbitmapgg.bilibili.widget.NoScrollViewPager;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 

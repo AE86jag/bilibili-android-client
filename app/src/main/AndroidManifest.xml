@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.spmystery.drama"
+<manifest package="com.spmystery.episode"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -24,9 +24,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <!--必要权限，解决安全风险漏洞，发送和注册广播事件需要调用带有传递权限的接口-->
-    <permission      android:name="com.spmystery.drama.openadsdk.permission.TT_PANGOLIN"
+    <permission      android:name="com.spmystery.episode.openadsdk.permission.TT_PANGOLIN"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.spmystery.drama.openadsdk.permission.TT_PANGOLIN" />
+    <uses-permission android:name="com.spmystery.episode.openadsdk.permission.TT_PANGOLIN" />
 
 
     <!-- 如果视频广告使用textureView播放，请务必添加，否则黑屏 -->
@@ -48,7 +48,7 @@
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
-            android:authorities="com.spmystery.drama.TTFileProvider"
+            android:authorities="com.spmystery.episode.TTFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -58,7 +58,7 @@
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="com.spmystery.drama.TTMultiProvider"
+            android:authorities="com.spmystery.episode.TTMultiProvider"
             android:exported="false" />
 
         <!--<provider

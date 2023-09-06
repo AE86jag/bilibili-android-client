@@ -45,7 +45,7 @@ import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.PreferenceUtil;
 import com.hotbitmapgg.bilibili.utils.ToastUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -975,22 +975,7 @@ public class BottomTabLayoutActivity extends AppCompatActivity implements Naviga
         }
 
         if (item.getItemId() == R.id.item_download) {
-            try {
-                UniMPOpenConfiguration uniMPOpenConfiguration = new UniMPOpenConfiguration();
-                uniMPOpenConfiguration.splashClass = MySplashView.class;
-                uniMPOpenConfiguration.extraData.put("darkmode", "light");
-                DCUniMPSDK instance = DCUniMPSDK.getInstance();
-                System.out.println("是否初始化：" + instance.isInitialize());
-                IUniMP uniMP = instance.openUniMP(this,"__UNI__B104B28", uniMPOpenConfiguration);
-                System.out.println(uniMP.getAppid());
-                System.out.println(uniMP.getCurrentPageUrl());
-                System.out.println(uniMP.isRunning());
-                System.out.println(uniMP.isRuning());
-                // TODO 先不做缓存
-                // mUniMPCaches.put(uniMP.getAppid(), uniMP);
-            } catch (Exception e) {
-                Log.e(TAG, "onNavigationItemSelected: open UniMP error", e);
-            }
+
             return true;
         }
         ToastUtil.showShort(getApplicationContext(), "功能暂未开放");

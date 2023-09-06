@@ -11,7 +11,7 @@
         <item>@string/drama_more</item>
     </string-array>
 
-    <string name="app_name">哔哩哔哩</string>
+    <string name="app_name">剧能传</string>
     <string name="info_play_times_format">%d</string>
     <string name="info_reviews_format">%d</string>
     <string name="hotbitmapgg">游客</string>
@@ -65,7 +65,7 @@
     <string name="rank">排行榜</string>
     <string name="topic">话题</string>
     <string name="load_more">加载中…</string>
-    <string name="search_hint">搜索视频,番剧,up主或av号</string>
+    <string name="search_hint">搜索短剧</string>
     <string name="danmaku_switch">弹幕开</string>
     <string name="play_immediately">立即播放</string>
     <string name="activity_center">活动中心</string>

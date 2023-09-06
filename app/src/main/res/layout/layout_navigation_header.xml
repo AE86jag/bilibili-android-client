@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end|bottom"
             android:clickable="true"
-            android:src="@drawable/home_menu_bg_click"
+
             android:tint="@color/nav_head_image_background" />
+        <!--android:src="@drawable/home_menu_bg_click"-->
     </FrameLayout>
 
     <RelativeLayout

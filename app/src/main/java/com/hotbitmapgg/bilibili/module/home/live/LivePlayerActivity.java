@@ -24,7 +24,7 @@ import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.LogUtil;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
 import com.hotbitmapgg.bilibili.widget.livelike.LoveLikeLayout;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

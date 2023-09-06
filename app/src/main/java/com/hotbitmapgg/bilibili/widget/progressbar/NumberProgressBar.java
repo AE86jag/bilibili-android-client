@@ -11,7 +11,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 /**
  * Created by hcc on 16/8/7 21:18

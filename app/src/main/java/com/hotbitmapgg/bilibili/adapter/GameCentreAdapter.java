@@ -14,7 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hotbitmapgg.bilibili.adapter.helper.AbsRecyclerViewAdapter;
 import com.hotbitmapgg.bilibili.entity.discover.GameCenterInfo;
 import com.hotbitmapgg.bilibili.module.common.BrowserActivity;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 

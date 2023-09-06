@@ -17,7 +17,7 @@ import com.hotbitmapgg.bilibili.module.home.bangumi.BangumiDetailsActivity;
 import com.hotbitmapgg.bilibili.module.home.bangumi.NewBangumiSerialActivity;
 import com.hotbitmapgg.bilibili.utils.NumberUtil;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 

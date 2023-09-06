@@ -29,7 +29,7 @@ import com.bytedance.sdk.dp.IDPAdListener;
 import com.bytedance.sdk.dp.IDPDramaListener;
 import com.bytedance.sdk.dp.IDPWidget;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

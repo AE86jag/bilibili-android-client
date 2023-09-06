@@ -6,7 +6,7 @@ import android.view.View;
 import com.hotbitmapgg.bilibili.widget.banner.BannerEntity;
 import com.hotbitmapgg.bilibili.widget.banner.BannerView;
 import com.hotbitmapgg.bilibili.widget.sectioned.StatelessSection;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 

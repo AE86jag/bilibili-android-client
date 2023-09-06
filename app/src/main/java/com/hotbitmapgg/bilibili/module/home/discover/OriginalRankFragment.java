@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.hotbitmapgg.bilibili.adapter.OriginalRankAdapter;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.LogUtil;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.entity.discover.OriginalRankInfo;
 import com.hotbitmapgg.bilibili.module.video.VideoDetailsActivity;

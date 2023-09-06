@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.hotbitmapgg.bilibili.entity.bangumi.BangumiAppIndexInfo;
 import com.hotbitmapgg.bilibili.module.home.bangumi.SeasonNewBangumiActivity;
 import com.hotbitmapgg.bilibili.utils.NumberUtil;

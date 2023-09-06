@@ -34,7 +34,7 @@ import com.hotbitmapgg.bilibili.network.auxiliary.UrlHelper;
 import com.hotbitmapgg.bilibili.utils.ConstantUtil;
 import com.hotbitmapgg.bilibili.utils.DisplayUtil;
 import com.hotbitmapgg.bilibili.utils.SystemBarHelper;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.hotbitmapgg.bilibili.entity.video.VideoDetailsInfo;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 

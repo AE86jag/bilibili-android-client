@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,14 +25,18 @@ import com.hotbitmapgg.bilibili.module.entry.GameCentreActivity;
 import com.hotbitmapgg.bilibili.module.entry.OffLineDownloadActivity;
 import com.hotbitmapgg.bilibili.module.home.index.BottomTabLayoutActivity;
 import com.hotbitmapgg.bilibili.module.search.TotalStationSearchActivity;
+import com.hotbitmapgg.bilibili.unimp.MySplashView;
 import com.hotbitmapgg.bilibili.widget.CircleImageView;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.dcloud.feature.sdk.DCUniMPSDK;
+import io.dcloud.feature.sdk.Interface.IUniMP;
+import io.dcloud.feature.unimp.config.UniMPOpenConfiguration;
 
 /**
  * Created by hcc on 16/8/4 21:18

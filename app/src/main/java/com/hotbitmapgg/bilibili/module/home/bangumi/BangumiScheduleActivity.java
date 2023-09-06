@@ -17,7 +17,7 @@ import com.hotbitmapgg.bilibili.utils.ToastUtil;
 import com.hotbitmapgg.bilibili.utils.WeekDayUtil;
 import com.hotbitmapgg.bilibili.widget.CircleProgressView;
 import com.hotbitmapgg.bilibili.widget.sectioned.SectionedRecyclerViewAdapter;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.ArrayList;
 import java.util.List;

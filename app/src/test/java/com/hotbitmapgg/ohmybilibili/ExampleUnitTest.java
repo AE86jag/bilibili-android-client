@@ -1,4 +1,4 @@
-package com.spmystery.drama;
+package com.spmystery.episode;
 
 import org.junit.Test;
 

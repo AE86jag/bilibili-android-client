@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.hotbitmapgg.bilibili.media.callback.MediaPlayerListener;
 import com.hotbitmapgg.bilibili.utils.LogUtil;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.hotbitmapgg.bilibili.media.callback.DanmukuSwitchListener;
 import com.hotbitmapgg.bilibili.media.callback.VideoBackListener;
 

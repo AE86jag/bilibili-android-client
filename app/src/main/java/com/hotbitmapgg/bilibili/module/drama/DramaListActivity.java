@@ -18,7 +18,7 @@ import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
 import com.hotbitmapgg.bilibili.widget.drama.DramaListAdapter;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import java.util.List;
 import java.util.Map;

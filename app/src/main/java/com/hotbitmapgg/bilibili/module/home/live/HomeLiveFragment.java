@@ -12,7 +12,7 @@ import com.hotbitmapgg.bilibili.base.RxLazyFragment;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 import com.hotbitmapgg.bilibili.utils.SnackbarUtil;
 import com.hotbitmapgg.bilibili.widget.CustomEmptyView;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 import butterknife.BindView;
 import rx.android.schedulers.AndroidSchedulers;

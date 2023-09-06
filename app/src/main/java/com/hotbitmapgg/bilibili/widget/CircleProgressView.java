@@ -15,7 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 
 /**
  * Created by hcc on 16/8/7 21:18

@@ -12,7 +12,7 @@ import com.hotbitmapgg.bilibili.adapter.NewBangumiSerialAdapter;
 import com.hotbitmapgg.bilibili.base.RxBaseActivity;
 import com.hotbitmapgg.bilibili.entity.bangumi.NewBangumiSerialInfo;
 import com.hotbitmapgg.bilibili.widget.CircleProgressView;
-import com.spmystery.drama.R;
+import com.spmystery.episode.R;
 import com.hotbitmapgg.bilibili.network.RetrofitHelper;
 
 import java.util.ArrayList;
